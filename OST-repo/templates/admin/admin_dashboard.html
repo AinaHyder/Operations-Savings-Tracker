@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                            <i class="fas fa-shield-alt text-red-600 dark:text-yellow-500 mr-3"></i>
+                            Admin Dashboard
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            System administration and oversight
+                        </p>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="text-right">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Welcome back</p>
+                            <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ session.username }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                        <i class="fas fa-users text-2xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Users</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ total_users }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                        <i class="fas fa-project-diagram text-2xl text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Projects</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ total_projects }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                        <i class="fas fa-clock text-2xl text-yellow-600 dark:text-yellow-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Pending Reviews</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ pending_projects }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                        <i class="fas fa-check-circle text-2xl text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Approved Projects</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ approved_projects }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                    <i class="fas fa-bolt text-yellow-500 mr-2"></i>Quick Actions
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">Administrative tasks and management</p>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="{{ url_for('admin_add_account') }}" 
+                       class="group bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Add User</h3>
+                                <p class="text-sm opacity-90">Create new user account</p>
+                            </div>
+                            <i class="fas fa-user-plus text-3xl opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('admin_projects') }}" 
+                       class="group bg-gradient-to-r from-green-500 to-green-600 p-6 rounded-xl text-white hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Manage Projects</h3>
+                                <p class="text-sm opacity-90">View and manage all projects</p>
+                            </div>
+                            <i class="fas fa-tasks text-3xl opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('admin_upload') }}" 
+                       class="group bg-gradient-to-r from-purple-500 to-purple-600 p-6 rounded-xl text-white hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Upload Data</h3>
+                                <p class="text-sm opacity-90">Import factory data files</p>
+                            </div>
+                            <i class="fas fa-upload text-3xl opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('admin_unit_costs') }}" 
+                       class="group bg-gradient-to-r from-orange-500 to-orange-600 p-6 rounded-xl text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold mb-2">Unit Costs</h3>
+                                <p class="text-sm opacity-90">Manage cost parameters</p>
+                            </div>
+                            <i class="fas fa-dollar-sign text-3xl opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Projects -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                            <i class="fas fa-history text-blue-600 dark:text-blue-400 mr-2"></i>Recent Projects
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">Latest project submissions</p>
+                    </div>
+                    <a href="{{ url_for('admin_projects') }}" 
+                       class="bg-red-600 dark:bg-yellow-500 text-white dark:text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-red-700 dark:hover:bg-yellow-600 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>View All
+                    </a>
+                </div>
+            </div>
+            <div class="p-6">
+                {% if recent_projects %}
+                    <div class="space-y-4">
+                        {% for project in recent_projects %}
+                        <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                            {{ project.project_name or 'Untitled Project' }}
+                                        </h3>
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full
+                                            {% if project.status == 'Approved' %}
+                                                bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300
+                                            {% elif project.status == 'Pending' %}
+                                                bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300
+                                            {% elif project.status == 'Rejected' %}
+                                                bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300
+                                            {% else %}
+                                                bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300
+                                            {% endif %}">
+                                            {{ project.status or 'Draft' }}
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-600 dark:text-gray-400">
+                                        <div>
+                                            <i class="fas fa-tag mr-2"></i>
+                                            <strong>Type:</strong> {{ project.project_type or 'N/A' }}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-industry mr-2"></i>
+                                            <strong>Factory:</strong> {{ project.factory_code or 'N/A' }}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-user mr-2"></i>
+                                            <strong>Created by:</strong> {{ project.created_by_username or 'N/A' }}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-calendar mr-2"></i>
+                                            <strong>Created:</strong> {{ project.created_at.strftime('%Y-%m-%d') if project.created_at else 'N/A' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 ml-4">
+                                    <a href="{{ url_for('admin_project_detail', project_id=project.project_id) }}" 
+                                       class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>View
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-project-diagram text-3xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No projects yet</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Projects will appear here once users start creating them.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

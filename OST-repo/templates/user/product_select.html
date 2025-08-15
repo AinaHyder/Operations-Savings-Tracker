@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Select Products - Dawlance{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+        <!-- Header Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Select Products</h1>
+            <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+        
+        <!-- Debug Information Card -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 mb-8">
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-amber-800">Debug Information</h3>
+                        <div class="mt-2 text-sm text-amber-700">
+                            <p><span class="font-semibold">Factory:</span> {{ project_data.factory_code }}</p>
+                            <p><span class="font-semibold">Products Count:</span> {{ products|length }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if products %}
+            <form method="POST" id="productsForm">
+                <!-- Main Content Card -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                    <!-- Card Header -->
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-semibold text-white">Available Products</h2>
+                            <button type="button" id="selectAllBtn" 
+                                    class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-2.5 rounded-lg font-medium hover:bg-opacity-30 transition-all duration-300 border border-white border-opacity-30">
+                                Select All
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {% for product in products %}
+                            <label class="group relative bg-gray-50 hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-300 rounded-xl p-6 cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-md">
+                                <div class="flex items-center">
+                                    <input type="checkbox" name="selected_products" 
+                                           value="{{ product.product_id }}"
+                                           class="product-checkbox h-5 w-5 text-blue-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                           {% if project_data.selected_products and product.product_id in project_data.selected_products %}checked{% endif %}>
+                                    <div class="ml-4">
+                                        <span class="text-gray-900 font-medium text-lg group-hover:text-blue-700 transition-colors duration-200">
+                                            {{ product.name }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Selection Indicator -->
+                                <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="bg-gray-50 px-8 py-6 flex justify-between items-center">
+                        <a href="{{ url_for('factory_select') }}" 
+                           class="inline-flex items-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Back
+                        </a>
+                        <button type="submit" 
+                                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                            Next Step
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <!-- No Products Available -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-12">
+                <div class="text-center">
+                    <svg class="mx-auto h-16 w-16 text-gray-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                    </svg>
+                    <h3 class="text-xl font-medium text-gray-900 mb-3">No Products Available</h3>
+                    <p class="text-gray-600 mb-6">There are currently no products available for selection in this factory.</p>
+                    <a href="{{ url_for('factory_select') }}" 
+                       class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Factory Selection
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAllBtn = document.getElementById('selectAllBtn');
+    const checkboxes = document.querySelectorAll('.product-checkbox');
+    
+    if (selectAllBtn && checkboxes.length > 0) {
+        // Initialize button state
+        updateSelectAllButton();
+        
+        // Select All functionality
+        selectAllBtn.addEventListener('click', function() {
+            const anyUnchecked = Array.from(checkboxes).some(cb => !cb.checked);
+            checkboxes.forEach(cb => cb.checked = anyUnchecked);
+            updateSelectAllButton();
+        });
+        
+        // Update individual checkboxes
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', updateSelectAllButton);
+        });
+    }
+    
+    function updateSelectAllButton() {
+        if (!selectAllBtn) return;
+        
+        const allChecked = checkboxes.length > 0 && 
+                          Array.from(checkboxes).every(cb => cb.checked);
+        
+        selectAllBtn.textContent = allChecked ? 'Deselect All' : 'Select All';
+    }
+});
+</script>
+{% endblock %}

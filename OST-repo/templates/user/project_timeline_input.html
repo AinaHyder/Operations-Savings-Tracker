@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}Project Timeline - {{ project_data.project_name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto max-w-4xl px-4">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Project Timeline & Savings Plan</h1>
+            <div class="inline-flex items-center px-4 py-2 bg-green-50 border border-green-200 rounded-full">
+                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                <span class="text-gray-700 font-medium">{{ project_data.project_name }}</span>
+                <span class="mx-2 text-gray-400">•</span>
+                <span class="text-gray-600">{{ project_data.start_date }} to {{ project_data.end_date }}</span>
+            </div>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div class="p-8">
+                <form action="{{ url_for('project_timeline_input') }}" method="POST">
+                    <div class="space-y-8">
+                        {% for month_idx in range(project_data.monthlyData|length) %}
+                        {% set month_data = project_data.monthlyData[month_idx] %}
+                        
+                        <!-- Month Card -->
+                        <div class="month-card border-2 border-gray-100 rounded-xl bg-gray-50 hover:border-green-200 transition-all duration-300">
+                            <!-- Month Header -->
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-t-xl">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-xl font-bold">{{ month_data.month }}</h3>
+                                    <div class="flex space-x-6">
+                                        <label class="inline-flex items-center cursor-pointer">
+                                            <input type="radio" name="user_entered_monthly[{{ month_idx }}]" 
+                                                   value="true" 
+                                                   class="w-4 h-4 text-white bg-white/20 border-white/30 focus:ring-white focus:ring-2"
+                                                   {% if month_data.userEnteredMonthly %}checked{% endif %}>
+                                            <span class="ml-2 font-medium">Monthly Total</span>
+                                        </label>
+                                        <label class="inline-flex items-center cursor-pointer">
+                                            <input type="radio" name="user_entered_monthly[{{ month_idx }}]" 
+                                                   value="false" 
+                                                   class="w-4 h-4 text-white bg-white/20 border-white/30 focus:ring-white focus:ring-2"
+                                                   {% if not month_data.userEnteredMonthly %}checked{% endif %}>
+                                            <span class="ml-2 font-medium">Daily Breakdown</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-6">
+                                <input type="hidden" name="month_name[]" value="{{ month_data.month }}">
+                                <input type="hidden" name="month_year[]" value="{{ month_data.year }}">
+                                <input type="hidden" name="month_number[]" value="{{ month_data.monthNumber }}">
+
+                                <!-- Monthly Total Section -->
+                                <div id="monthly-section-{{ month_idx }}" class="{% if not month_data.userEnteredMonthly %}hidden{% endif %}">
+                                    <div class="bg-white rounded-lg border border-gray-200 p-4">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Monthly Total Units</label>
+                                        <div class="relative">
+                                            <input type="number" step="0.01" 
+                                                   name="monthly_total[{{ month_idx }}]" 
+                                                   class="monthly-total w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                                                   value="{{ month_data.totalValue | round(2) }}"
+                                                   {% if not month_data.userEnteredMonthly %}disabled{% endif %}>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Daily Breakdown Section -->
+                                <div id="daily-section-{{ month_idx }}" class="{% if month_data.userEnteredMonthly %}hidden{% endif %}">
+                                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                                        <div class="overflow-x-auto">
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Day</th>
+                                                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Value</th>
+                                                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Notes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-100">
+                                                    {% for day in month_data.days %}
+                                                    <tr class="hover:bg-green-50 transition-colors duration-200">
+                                                        <td class="px-4 py-3 text-sm font-medium text-gray-900">Day {{ day.day }}</td>
+                                                        <td class="px-4 py-3">
+                                                            <input type="number" step="0.01" 
+                                                                   name="day_value_{{ month_idx }}_{{ day.day }}" 
+                                                                   class="day-value w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                                                                   value="{{ day.value | round(2) }}"
+                                                                   data-month-index="{{ month_idx }}"
+                                                                   {% if month_data.userEnteredMonthly %}disabled{% endif %}>
+                                                        </td>
+                                                        <td class="px-4 py-3">
+                                                            <input type="text" 
+                                                                   name="day_notes_{{ month_idx }}_{{ day.day }}" 
+                                                                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                                                                   value="{{ day.notes }}"
+                                                                   {% if month_data.userEnteredMonthly %}disabled{% endif %}>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        <!-- Monthly Total Summary -->
+                                        <div class="bg-green-50 border-t border-green-200 px-4 py-3">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-semibold text-gray-700">Monthly Total:</span>
+                                                <span id="month-total-{{ month_idx }}" class="text-lg font-bold text-green-600">
+                                                    {{ month_data.totalValue | round(2) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-10 flex justify-end pt-6 border-t border-gray-200">
+                        <button type="submit" 
+                                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 rounded-lg text-white font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-lg hover:shadow-xl transition-all duration-200">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                            Save & Continue
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle between monthly/daily views
+    document.querySelectorAll('input[name^="user_entered_monthly["]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const monthIndex = this.name.match(/\[(\d+)\]/)[1];
+            const isMonthly = this.value === 'true';
+            
+            document.getElementById(`monthly-section-${monthIndex}`).classList.toggle('hidden', !isMonthly);
+            document.getElementById(`daily-section-${monthIndex}`).classList.toggle('hidden', isMonthly);
+            
+            // Enable/disable inputs
+            document.querySelectorAll(`#daily-section-${monthIndex} input`).forEach(input => {
+                input.disabled = isMonthly;
+            });
+            document.querySelector(`#monthly-section-${monthIndex} .monthly-total`).disabled = !isMonthly;
+        });
+    });
+
+    // Auto-calculate daily totals
+    document.querySelectorAll('.day-value').forEach(input => {
+        input.addEventListener('input', function() {
+            const monthIndex = this.dataset.monthIndex;
+            updateMonthTotal(monthIndex);
+        });
+    });
+
+    function updateMonthTotal(monthIndex) {
+        const dayInputs = document.querySelectorAll(`.day-value[data-month-index="${monthIndex}"]`);
+        let total = 0;
+        
+        dayInputs.forEach(input => {
+            total += parseFloat(input.value) || 0;
+        });
+        
+        document.getElementById(`month-total-${monthIndex}`).textContent = total.toFixed(2);
+        document.querySelector(`#monthly-section-${monthIndex} .monthly-total`).value = total.toFixed(2);
+    }
+});
+</script>
+
+<style>
+.month-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.month-card:hover {
+    transform: translateY(-2px);
+    shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Custom focus states for better accessibility */
+input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
+}
+
+/* Smooth transitions for all interactive elements */
+input, button, a {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Table hover effects */
+tbody tr:hover {
+    background-color: rgba(34, 197, 94, 0.03);
+}
+</style>
+{% endblock %}

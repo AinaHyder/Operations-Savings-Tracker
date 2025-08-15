@@ -1,0 +1,748 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Dashboard - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block heading %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="py-6">
+    <!-- Key Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-fade-in">
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Projects</p>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white" id="totalProjects">156</p>
+                    <p class="text-sm text-green-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +12% from last month
+                    </p>
+                </div>
+                <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+                    <i class="fas fa-project-diagram text-blue-600 dark:text-blue-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Approved Projects</p>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white" id="approvedProjects">89</p>
+                    <p class="text-sm text-green-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +8% approval rate
+                    </p>
+                </div>
+                <div class="p-3 bg-green-100 dark:bg-green-900 rounded-full">
+                    <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Budget</p>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white" id="totalBudget">$2.4M</p>
+                    <p class="text-sm text-blue-600 mt-1">
+                        <i class="fas fa-info-circle"></i> Allocated funds
+                    </p>
+                </div>
+                <div class="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-full">
+                    <i class="fas fa-dollar-sign text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Savings</p>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white" id="totalSavings">$1.8M</p>
+                    <p class="text-sm text-green-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +15% this quarter
+                    </p>
+                </div>
+                <div class="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-full">
+                    <i class="fas fa-piggy-bank text-emerald-600 dark:text-emerald-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="glass-card rounded-lg p-6 mb-8 animate-fade-in">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <i class="fas fa-filter mr-2"></i>Filters & Controls
+        </h3>
+        <div class="filter-controls">
+            <div class="relative">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="searchProjects" placeholder="Search projects..." 
+                       class="filter-input pl-10 w-64">
+            </div>
+            <select id="projectTypeFilter" class="filter-input">
+                <option value="">All Project Types</option>
+                <option value="six_sigma">Six Sigma</option>
+                <option value="kaizen">Kaizen</option>
+                <option value="lean">Lean Manufacturing</option>
+                <option value="automation">Automation</option>
+            </select>
+            <select id="statusFilter" class="filter-input">
+                <option value="">All Status</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+                <option value="rejected">Rejected</option>
+                <option value="completed">Completed</option>
+            </select>
+            <input type="date" id="startDate" class="filter-input">
+            <input type="date" id="endDate" class="filter-input">
+            <button id="applyFilters" class="btn btn-primary">
+                <i class="fas fa-filter"></i>
+                Apply Filters
+            </button>
+        </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <!-- Project Status Distribution -->
+        <div class="chart-container animate-fade-in" onclick="openModal('projectStatusChart', 'Project Status Distribution')">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <i class="fas fa-chart-pie mr-2 text-blue-600"></i>Project Status Distribution
+                </h3>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+            </div>
+            <div id="projectStatusChart" class="h-64"></div>
+        </div>
+
+        <!-- Monthly Savings Trend -->
+        <div class="chart-container animate-fade-in" onclick="openModal('savingsTrendChart', 'Monthly Savings Trend')">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <i class="fas fa-chart-line mr-2 text-green-600"></i>Monthly Savings Trend
+                </h3>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+            </div>
+            <div id="savingsTrendChart" class="h-64"></div>
+        </div>
+
+        <!-- Savings by Project Type -->
+        <div class="chart-container animate-fade-in" onclick="openModal('savingsByTypeChart', 'Savings by Project Type')">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <i class="fas fa-chart-bar mr-2 text-purple-600"></i>Savings by Project Type
+                </h3>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+            </div>
+            <div id="savingsByTypeChart" class="h-64"></div>
+        </div>
+
+        <!-- Forecast vs Actual -->
+        <div class="chart-container animate-fade-in" onclick="openModal('forecastActualChart', 'Forecast vs Actual Performance')">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <i class="fas fa-chart-area mr-2 text-orange-600"></i>Forecast vs Actual
+                </h3>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+            </div>
+            <div id="forecastActualChart" class="h-64"></div>
+        </div>
+    </div>
+
+    <!-- Six Sigma Section -->
+    <div class="glass-card rounded-lg p-6 mb-8 animate-fade-in">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
+            <i class="fas fa-sigma mr-2 text-indigo-600"></i>Six Sigma Analytics
+        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="chart-container" onclick="openModal('sixSigmaPhaseChart', 'Six Sigma Phase Distribution')">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">DMAIC Phase Distribution</h4>
+                    <button class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-expand-alt"></i>
+                    </button>
+                </div>
+                <div id="sixSigmaPhaseChart" class="h-64"></div>
+            </div>
+
+            <div class="chart-container" onclick="openModal('sixSigmaTimelineChart', 'Six Sigma Project Timeline')">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Project Timeline</h4>
+                    <button class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-expand-alt"></i>
+                    </button>
+                </div>
+                <div id="sixSigmaTimelineChart" class="h-64"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investment & Machinery Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Machinery Investment</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">$850K</p>
+                    <p class="text-sm text-blue-600 mt-1">35% of total budget</p>
+                </div>
+                <div class="p-3 bg-indigo-100 dark:bg-indigo-900 rounded-full">
+                    <i class="fas fa-cogs text-indigo-600 dark:text-indigo-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">ROI</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">245%</p>
+                    <p class="text-sm text-green-600 mt-1">Above target</p>
+                </div>
+                <div class="p-3 bg-green-100 dark:bg-green-900 rounded-full">
+                    <i class="fas fa-percentage text-green-600 dark:text-green-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Payback Period</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">18 Mo</p>
+                    <p class="text-sm text-orange-600 mt-1">Average period</p>
+                </div>
+                <div class="p-3 bg-orange-100 dark:bg-orange-900 rounded-full">
+                    <i class="fas fa-clock text-orange-600 dark:text-orange-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="chartModal" class="modal">
+    <div class="modal-content">
+        <div class="flex items-center justify-between mb-6">
+            <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white"></h3>
+            <button id="closeModal" class="text-gray-400 hover:text-gray-600 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="modalChart" class="w-full h-full"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/apexcharts@3.44.0/dist/apexcharts.min.js"></script>
+<style>
+    :root {
+        --primary-color: #1e40af;
+        --secondary-color: #3b82f6;
+        --accent-color: #10b981;
+        --warning-color: #f59e0b;
+        --danger-color: #ef4444;
+        --success-color: #22c55e;
+        --dark-bg: #0f172a;
+        --card-bg: #ffffff;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --border-color: #e5e7eb;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark {
+        --card-bg: #1e293b;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --border-color: #334155;
+    }
+
+    .gradient-bg {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dark .glass-card {
+        background: rgba(30, 41, 59, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .metric-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+
+    .metric-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .chart-container {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .chart-container:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 32px;
+        max-width: 90vw;
+        max-height: 90vh;
+        width: 900px;
+        height: 700px;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+    }
+
+    .modal.active .modal-content {
+        transform: scale(1);
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+        background: var(--text-secondary);
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #4b5563;
+    }
+
+    .filter-controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .filter-input {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 16px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+    }
+
+    .filter-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.8;
+        }
+    }
+
+    .loading-spinner {
+        border: 3px solid var(--border-color);
+        border-top: 3px solid var(--primary-color);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<script>
+    // Mock data for charts
+    const mockData = {
+        projectStatus: {
+            series: [20, 14, 2, 11],
+            labels: ['Approved', 'Pending', 'In Progress', 'Rejected']
+        },
+        savingsTrend: {
+            series: [{
+                name: 'Monthly Savings',
+                data: [120000, 135000, 148000, 162000, 175000, 189000, 203000, 218000, 235000, 252000, 268000, 285000]
+            }],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        savingsByType: {
+            series: [{
+                name: 'Savings',
+                data: [450000, 320000, 280000, 180000, 120000]
+            }],
+            categories: ['Six Sigma', 'Lean Manufacturing', 'Automation', 'Kaizen', 'Process Improvement']
+        },
+        forecastActual: {
+            series: [
+                {
+                    name: 'Forecasted',
+                    data: [150000, 165000, 180000, 195000, 210000, 225000]
+                },
+                {
+                    name: 'Actual',
+                    data: [145000, 162000, 175000, 188000, 205000, 220000]
+                }
+            ],
+            categories: [ 'DMAIC Phase: Measure', 
+        'DMAIC Phase: Analyze', 
+        'DMAIC Phase: Improve', 
+        'DMAIC Phase: Control', 
+        'Lean Waste Reduction', 
+        'Sigma Level Uplift']
+        },
+        sixSigmaPhase: {
+            series: [15, 12, 18, 22, 8],
+            labels: ['Define', 'Measure', 'Analyze', 'Improve', 'Control']
+        },
+        sixSigmaTimeline: {
+            series: [{
+                name: 'Projects',
+                data: [8, 12, 15, 18, 22, 19, 16, 14, 11, 9, 7, 5]
+            }],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        }
+    };
+
+    // Chart instances
+    let charts = {};
+    let modalChart = null;
+
+    // Chart configuration
+    function getChartOptions(isDark = false) {
+        return {
+            chart: {
+                fontFamily: 'Inter, sans-serif',
+                toolbar: { show: false },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800
+                }
+            },
+            theme: {
+                mode: isDark ? 'dark' : 'light'
+            },
+            colors: ['#1e40af', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'],
+            tooltip: {
+                theme: isDark ? 'dark' : 'light'
+            },
+            grid: {
+                borderColor: isDark ? '#334155' : '#e5e7eb'
+            }
+        };
+    }
+
+    // Initialize charts
+    function initCharts() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const baseOptions = getChartOptions(isDark);
+
+        // Project Status Chart
+        charts.projectStatus = new ApexCharts(document.querySelector("#projectStatusChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'donut', height: 250 },
+            series: mockData.projectStatus.series,
+            labels: mockData.projectStatus.labels,
+            legend: { position: 'bottom' },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '60%'
+                    }
+                }
+            }
+        });
+
+        // Savings Trend Chart
+        charts.savingsTrend = new ApexCharts(document.querySelector("#savingsTrendChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'area', height: 250 },
+            series: mockData.savingsTrend.series,
+            xaxis: { categories: mockData.savingsTrend.categories },
+            stroke: { curve: 'smooth', width: 3 },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.1
+                }
+            }
+        });
+
+        // Savings by Type Chart
+        charts.savingsByType = new ApexCharts(document.querySelector("#savingsByTypeChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'bar', height: 250 },
+            series: mockData.savingsByType.series,
+            xaxis: { categories: mockData.savingsByType.categories },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    horizontal: false
+                }
+            }
+        });
+
+        // Forecast vs Actual Chart
+        charts.forecastActual = new ApexCharts(document.querySelector("#forecastActualChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'line', height: 250 },
+            series: mockData.forecastActual.series,
+            xaxis: { categories: mockData.forecastActual.categories },
+            stroke: { curve: 'smooth', width: [2, 3], dashArray: [5, 0] }
+        });
+
+        // Six Sigma Phase Chart
+        charts.sixSigmaPhase = new ApexCharts(document.querySelector("#sixSigmaPhaseChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'pie', height: 250 },
+            series: mockData.sixSigmaPhase.series,
+            labels: mockData.sixSigmaPhase.labels,
+            legend: { position: 'bottom' }
+        });
+
+        // Six Sigma Timeline Chart
+        charts.sixSigmaTimeline = new ApexCharts(document.querySelector("#sixSigmaTimelineChart"), {
+            ...baseOptions,
+            chart: { ...baseOptions.chart, type: 'bar', height: 250 },
+            series: mockData.sixSigmaTimeline.series,
+            xaxis: { categories: mockData.sixSigmaTimeline.categories },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    columnWidth: '60%'
+                }
+            }
+        });
+
+        // Render all charts
+        Object.values(charts).forEach(chart => chart.render());
+    }
+
+    // Update charts theme
+    function updateChartsTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        Object.values(charts).forEach(chart => {
+            chart.updateOptions({
+                theme: { mode: isDark ? 'dark' : 'light' },
+                tooltip: { theme: isDark ? 'dark' : 'light' },
+                grid: { borderColor: isDark ? '#334155' : '#e5e7eb' }
+            });
+        });
+    }
+
+    // Modal functions
+    function openModal(chartId, title) {
+        const modal = document.getElementById('chartModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalChart = document.getElementById('modalChart');
+        
+        modalTitle.textContent = title;
+        modal.classList.add('active');
+        
+        // Create enlarged chart
+        setTimeout(() => {
+            const originalChart = charts[chartId.replace('Chart', '')];
+            if (originalChart) {
+                const config = { ...originalChart.w.config };
+                config.chart.height = 500;
+                
+                if (modalChart) {
+                    modalChart.destroy?.();
+                }
+                
+                window.modalChartInstance = new ApexCharts(modalChart, config);
+                window.modalChartInstance.render();
+            }
+        }, 100);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('chartModal');
+        modal.classList.remove('active');
+        
+        if (window.modalChartInstance) {
+            window.modalChartInstance.destroy();
+            window.modalChartInstance = null;
+        }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        initCharts();
+        
+        // Set current date as default for date inputs
+        const today = new Date().toISOString().split('T')[0];
+        const lastMonth = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        document.getElementById('startDate').value = lastMonth;
+        document.getElementById('endDate').value = today;
+
+        // Theme change observer
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    updateChartsTheme();
+                }
+            });
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('chartModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Refresh data
+    document.getElementById('refreshData')?.addEventListener('click', () => {
+        const btn = document.getElementById('refreshData');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<div class="loading-spinner"></div><span>Refreshing...</span>';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+            // Here you would typically reload the data
+            console.log('Data refreshed');
+        }, 2000);
+    });
+
+    // Filter functionality
+    document.getElementById('applyFilters').addEventListener('click', () => {
+        const searchTerm = document.getElementById('searchProjects').value;
+        const projectType = document.getElementById('projectTypeFilter').value;
+        const status = document.getElementById('statusFilter').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        
+        console.log('Applying filters:', { searchTerm, projectType, status, startDate, endDate });
+        // Here you would filter the data and update charts
+    });
+
+    // Make functions globally available
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+</script>
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Factory Selection - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-lg mb-6">
+                <i class="fas fa-industry text-white text-3xl"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Factory Selection
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Select the factory where your project will be implemented
+            </p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="mb-12">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-check text-sm"></i>
+                        </div>
+                        <span class="ml-3 text-sm font-semibold text-green-600">Project Type</span>
+                    </div>
+                    <div class="w-12 h-1 bg-green-500 rounded-full"></div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-check text-sm"></i>
+                        </div>
+                        <span class="ml-3 text-sm font-semibold text-green-600">Project Details</span>
+                    </div>
+                    <div class="w-12 h-1 bg-blue-500 rounded-full"></div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg">
+                            <span class="text-sm font-bold">3</span>
+                        </div>
+                        <span class="ml-3 text-sm font-semibold text-blue-600">Factory Selection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Card -->
+        <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+            <div class="p-8 lg:p-12">
+                <form method="POST" class="space-y-10">
+                    <!-- Factory Selection Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {% for factory in factories %}
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="factory_code" id="factory_{{ factory.code }}" value="{{ factory.code }}" class="sr-only peer" required>
+                            <div class="relative bg-white border-2 border-gray-200 rounded-2xl p-8 peer-checked:border-blue-500 peer-checked:bg-blue-50 hover:border-blue-300 hover:shadow-xl transition-all duration-300 group-hover:transform group-hover:scale-105 shadow-lg">
+                                <!-- Selection Indicator -->
+                                <div class="absolute top-4 right-4 w-8 h-8 border-2 border-gray-300 rounded-full peer-checked:border-blue-500 peer-checked:bg-blue-500 flex items-center justify-center transition-all duration-200">
+                                    <i class="fas fa-check text-white text-sm opacity-0 peer-checked:opacity-100"></i>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                        <i class="fas fa-industry text-white text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                                        {{ factory.name }}
+                                    </h3>
+                                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                                        {{ factory.description }}
+                                    </p>
+                                    <div class="space-y-3 text-sm text-gray-500">
+                                        <div class="flex items-center justify-center bg-gray-50 rounded-lg py-2 px-3">
+                                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                                            <span class="font-medium">{{ factory.location }}</span>
+                                        </div>
+                                        <div class="flex items-center justify-center bg-gray-50 rounded-lg py-2 px-3">
+                                            <i class="fas fa-users text-blue-500 mr-2"></i>
+                                            <span class="font-medium">{{ factory.employees }}</span>
+                                        </div>
+                                        <div class="flex items-center justify-center bg-gray-50 rounded-lg py-2 px-3">
+                                            <i class="fas fa-calendar text-blue-500 mr-2"></i>
+                                            <span class="font-medium">Est. {{ factory.established }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center pt-8 border-t-2 border-gray-200 gap-6">
+                        <a href="{{ url_for('project_details_input') }}" 
+                           class="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto">
+                            <i class="fas fa-arrow-left mr-3"></i>
+                            Back
+                        </a>
+                        <button type="submit"
+                            class="inline-flex items-center justify-center px-12 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl transition-all duration-200 transform hover:scale-105 shadow-lg w-full sm:w-auto">
+                            Continue
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="mt-10 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-8">
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">
+                    <i class="fas fa-info-circle text-blue-600 mr-3"></i>
+                    Factory Selection Guide
+                </h3>
+                <p class="text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                    Choose the factory that best aligns with your project goals. Consider factors like location, workforce size, and operational capacity when making your selection.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Enhanced radio button styling */
+    input[type="radio"]:checked + div {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.2));
+        border-color: #3b82f6;
+        transform: translateY(-2px);
+    }
+
+    /* Smooth transitions */
+    * {
+        transition: all 0.2s ease;
+    }
+
+    /* Focus states */
+    button:focus {
+        outline: none;
+        ring: 4px;
+        ring-color: rgba(59, 130, 246, 0.3);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const radios = document.querySelectorAll('input[name="factory_code"]');
+        const form = document.querySelector("form");
+
+        radios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                console.log(`Selected Factory: ${radio.value}`);
+                
+                // Add visual feedback
+                radios.forEach(r => {
+                    const card = r.closest('label').querySelector('div');
+                    if (r.checked) {
+                        card.classList.add('ring-4', 'ring-blue-200');
+                    } else {
+                        card.classList.remove('ring-4', 'ring-blue-200');
+                    }
+                });
+            });
+        });
+
+        form.addEventListener("submit", function (e) {
+            const selected = document.querySelector('input[name="factory_code"]:checked');
+            if (!selected) {
+                e.preventDefault();
+                alert("Please select a factory before continuing.");
+                return;
+            }
+            const continueBtn = form.querySelector('button[type="submit"]');
+            continueBtn.disabled = true;
+            continueBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-3"></i> Processing...`;
+        });
+    });
+</script>
+
+{% endblock %}

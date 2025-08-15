@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Savings Tracker - Welcome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .background-charts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image: url('static/images/charts.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-weight: 600;
+            color: #374151;
+            opacity: 0.12;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            25% { width: 30%; }
+            50% { width: 60%; }
+            75% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(1deg); }
+        }
+        
+        .animate-slide-down {
+            animation: slideDown 1s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        .animate-loading {
+            animation: loadingProgress 4s ease-in-out 2s forwards;
+            width: 0%;
+        }
+
+        .animate-loading-container {
+            animation: fadeIn 0.5s ease-out 1.8s forwards;
+            opacity: 0;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-float-text {
+            animation: floatText 4s ease-in-out infinite;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .loading-bar {
+            background: linear-gradient(90deg, #dc2626, #ef4444, #f97316, #eab308);
+            background-size: 300% 100%;
+            animation: gradientShift 2s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chart-container {
+            position: absolute;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden relative">
+    
+    <!-- Background Image and Text -->
+    <div class="background-charts">
+        <!-- Chart containers will be populated by JavaScript -->
+        <div id="chart1" class="chart-container" style="top: 10%; left: 5%; width: 200px; height: 150px;"></div>
+        <div id="chart2" class="chart-container" style="top: 20%; right: 8%; width: 180px; height: 120px;"></div>
+        <div id="chart3" class="chart-container" style="bottom: 25%; left: 10%; width: 160px; height: 140px;"></div>
+        <div id="chart4" class="chart-container" style="bottom: 15%; right: 15%; width: 190px; height: 130px;"></div>
+        <div id="chart5" class="chart-container" style="top: 50%; left: 2%; width: 140px; height: 100px;"></div>
+        <div id="chart6" class="chart-container" style="top: 60%; right: 5%; width: 170px; height: 110px;"></div>
+    </div>
+
+    <!-- Floating Text Elements -->
+    <div class="floating-text text-4xl font-black" style="top: 15%; left: 25%; animation-delay: 0s;">KAIZEN</div>
+    <div class="floating-text text-3xl font-bold" style="top: 35%; right: 20%; animation-delay: 1s;">SIX SIGMA</div>
+    <div class="floating-text text-2xl font-semibold" style="bottom: 40%; left: 15%; animation-delay: 2s;">LEAN</div>
+    <div class="floating-text text-3xl font-bold" style="bottom: 20%; right: 25%; animation-delay: 0.5s;">ROI</div>
+    <div class="floating-text text-2xl font-semibold" style="top: 25%; left: 70%; animation-delay: 1.5s;">PAYBACK</div>
+    <div class="floating-text text-xl font-medium" style="top: 70%; left: 30%; animation-delay: 2.5s;">INFRASTRUCTURE</div>
+    <div class="floating-text text-2xl font-semibold" style="top: 45%; right: 35%; animation-delay: 3s;">MIP</div>
+    <div class="floating-text text-xl font-medium" style="bottom: 35%; right: 10%; animation-delay: 1.8s;">EFFICIENCY</div>
+    <div class="floating-text text-lg font-medium" style="top: 80%; right: 40%; animation-delay: 2.2s;">OPTIMIZATION</div>
+
+    <!-- Main Content Container -->
+    <div 
+        id="mainContainer"
+        class="flex flex-col items-center justify-center min-h-screen px-4 cursor-pointer transition-all duration-500 hover:scale-[1.01] relative z-10"
+        onclick="navigateToLogin()"
+    >
+        <!-- Logo Section -->
+        <div class="text-center mb-12 animate-slide-down">
+            <div class="logo-container w-36 h-36 mx-auto mb-8 rounded-3xl flex items-center justify-center card-shadow animate-float relative">
+                <i class="fas fa-chart-line text-6xl text-white"></i>
+                <div class="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check text-white text-sm"></i>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h1 class="text-3xl font-black text-gray-800 tracking-wide">DAWLANCE</h1>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 mx-auto rounded-full"></div>
+                <p class="text-sm font-semibold text-gray-600 uppercase tracking-widest">Excellence in Operations</p>
+            </div>
+        </div>
+        
+        <!-- Project Title -->
+        <div class="text-center mb-16 animate-slide-up max-w-5xl">
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6 leading-tight">
+                Operations
+                <span class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+                    Savings
+                </span>
+                <br>
+                <span class="text-5xl md:text-6xl lg:text-7xl">Tracker</span>
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-700 font-bold mb-4">
+                Streamlining Operations for Maximum Efficiency
+            </p>
+            <p class="text-lg text-gray-600 font-medium">
+                Powered by Lean Six Sigma Methodologies & Advanced Analytics
+            </p>
+        </div>
+
+        <!-- Click to Continue -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in">
+            <div class="text-center glass-effect rounded-2xl px-8 py-4">
+                <p class="text-gray-700 font-bold text-xl mb-3 animate-pulse-slow">
+                    Click anywhere to continue
+                </p>
+                <div class="flex justify-center">
+                    <div class="animate-bounce">
+                        <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-arrow-down text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-24 h-24 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 rounded-full flex items-center justify-center mb-8 animate-spin">
+                <i class="fas fa-chart-line text-white text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Operations Savings Tracker</h2>
+            <p class="text-gray-600 font-medium text-lg">Loading excellence framework...</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background charts
+        function initializeCharts() {
+            // Chart 1 - Donut Chart
+            const chart1Options = {
+                series: [44, 55, 13, 43],
+                chart: { type: 'donut', height: 150, toolbar: { show: false } },
+                labels: ['Kaizen', 'Six Sigma', 'Lean', 'MIP'],
+                colors: ['#dc2626', '#ea580c', '#d97706', '#ca8a04'],
+                legend: { show: false },
+                dataLabels: { enabled: false },
+                plotOptions: { pie: { donut: { size: '70%' } } }
+            };
+            if (document.querySelector("#chart1")) {
+                new ApexCharts(document.querySelector("#chart1"), chart1Options).render();
+            }
+
+            // Chart 2 - Bar Chart
+            const chart2Options = {
+                series: [{ data: [30, 40, 35, 50, 49, 60, 70] }],
+                chart: { type: 'bar', height: 120, toolbar: { show: false } },
+                colors: ['#dc2626'],
+                xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                yaxis: { labels: { show: false } },
+                grid: { show: false },
+                dataLabels: { enabled: false }
+            };
+            if (document.querySelector("#chart2")) {
+                new ApexCharts(document.querySelector("#chart2"), chart2Options).render();
+            }
+
+            // Chart 3 - Line Chart
+            const chart3Options = {
+                series: [{ data: [10, 41, 35, 51, 49, 62, 69, 91, 148] }],
+                chart: { type: 'line', height: 140, toolbar: { show: false } },
+                colors: ['#ea580c'],
+                stroke: { curve: 'smooth', width: 3 },
+                xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                yaxis: { labels: { show: false } },
+                grid: { show: false },
+                dataLabels: { enabled: false }
+            };
+            if (document.querySelector("#chart3")) {
+                new ApexCharts(document.querySelector("#chart3"), chart3Options).render();
+            }
+
+            // Chart 4 - Area Chart
+            const chart4Options = {
+                series: [{ data: [31, 40, 28, 51, 42, 109, 100] }],
+                chart: { type: 'area', height: 130, toolbar: { show: false } },
+                colors: ['#d97706'],
+                fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.9 } },
+                stroke: { curve: 'smooth' },
+                xaxis: { labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
+                yaxis: { labels: { show: false } },
+                grid: { show: false },
+                dataLabels: { enabled: false }
+            };
+            if (document.querySelector("#chart4")) {
+                new ApexCharts(document.querySelector("#chart4"), chart4Options).render();
+            }
+
+            // Chart 5 - Radial Bar
+            const chart5Options = {
+                series: [70],
+                chart: { type: 'radialBar', height: 100, toolbar: { show: false } },
+                colors: ['#ca8a04'],
+                plotOptions: { radialBar: { dataLabels: { show: false } } }
+            };
+            if (document.querySelector("#chart5")) {
+                new ApexCharts(document.querySelector("#chart5"), chart5Options).render();
+            }
+
+            // Chart 6 - Pie Chart
+            const chart6Options = {
+                series: [25, 35, 40],
+                chart: { type: 'pie', height: 110, toolbar: { show: false } },
+                labels: ['ROI', 'Payback', 'Savings'],
+                colors: ['#dc2626', '#ea580c', '#d97706'],
+                legend: { show: false },
+                dataLabels: { enabled: false }
+            };
+            if (document.querySelector("#chart6")) {
+                new ApexCharts(document.querySelector("#chart6"), chart6Options).render();
+            }
+        }
+
+        // Add floating animation to text elements
+        document.querySelectorAll('.floating-text').forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.5}s`;
+            element.classList.add('animate-float-text');
+        });
+
+        // Hide loading overlay and initialize charts
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.transition = 'opacity 0.8s ease-out';
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    // Initialize charts after ApexCharts is loaded
+                    if (typeof ApexCharts !== 'undefined') {
+                        initializeCharts();
+                    } else {
+                        // Retry after a short delay if ApexCharts isn't loaded yet
+                        setTimeout(() => {
+                            if (typeof ApexCharts !== 'undefined') {
+                                initializeCharts();
+                            }
+                        }, 1000);
+                    }
+                }, 800);
+            }, 1500);
+        });
+
+        // Navigation function
+        function navigateToLogin() {
+            const mainContainer = document.getElementById('mainContainer');
+            mainContainer.style.transition = 'all 0.6s ease-out';
+            mainContainer.style.transform = 'scale(0.95)';
+            mainContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                window.location.href = '/login'; 
+            }, 600);
+        }
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                navigateToLogin();
+            }
+        });
+        
+        // Enhanced touch support
+        let touchStartTime = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartTime = Date.now();
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            const touchDuration = Date.now() - touchStartTime;
+            if (touchDuration < 500) {
+                navigateToLogin();
+            }
+        });
+        
+        // Prevent context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Prefetch login page
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = 'login.html';
+        document.head.appendChild(link);
+    </script>
+</body>
+</html>

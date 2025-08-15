@@ -1,0 +1,526 @@
+{% extends "base.html" %}
+
+{% block title %}Project Review - {{ project.project_name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header with Status -->
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+                    <i class="fas fa-clipboard-check text-blue-600 dark:text-blue-400 mr-3"></i>
+                    Project Review
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Detailed project review and approval</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                    {% if project.status.lower() == 'approved' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% endif %}
+                    {% if project.status.lower() == 'pending' %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200{% endif %}
+                    {% if project.status.lower() == 'rejected' %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200{% endif %}">
+                    <i class="fas 
+                        {% if project.status.lower() == 'approved' %}fa-check-circle{% endif %}
+                        {% if project.status.lower() == 'pending' %}fa-clock{% endif %}
+                        {% if project.status.lower() == 'rejected' %}fa-times-circle{% endif %}
+                        mr-2"></i>
+                    {{ project.status }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border {% if category == 'success' %}bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200{% elif category == 'danger' %}bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200{% else %}bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200{% endif %} transition-all duration-300">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %} mr-3"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Enhanced Currency Converter Bar -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 border border-blue-200 dark:border-gray-600 rounded-xl shadow-sm mb-6 transition-all duration-300">
+            <div class="px-6 py-4">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-1">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exchange-alt text-sm"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Currency Converter</span>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <label for="currency-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Currency:</label>
+                                <select id="currency-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500">
+                                    <option value="">PKR (Default)</option>
+                                    {% for currency_item in currencies %}
+                                    <option value="{{ currency_item.currency_name }}">{{ currency_item.currency_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <label for="month-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Month:</label>
+                                <select id="month-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500">
+                                    {% for month in months %}
+                                    <option value="{{ month }}" {% if month == current_month %}selected{% endif %}>{{ month }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="ytd-display" class="hidden px-3 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-700">
+                            <!-- YTD info will appear here -->
+                        </div>
+                        
+                        <div id="conversion-status" class="hidden px-3 py-2 rounded-lg text-sm font-medium">
+                            <!-- Status messages will appear here -->
+                        </div>
+                    </div>
+                    
+                    <button id="reset-currency" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200 transform hover:scale-105 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <i class="fas fa-undo mr-2"></i>Reset to PKR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Title Card -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg p-6 mb-8 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">{{ project.project_name }}</h2>
+                    <p class="text-blue-100">{{ project.project_description }}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">ID: {{ project.project_id }}</span>
+                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">{{ project.project_type }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column (2/3 width) -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Project Information Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Project Information</h3>
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Factory</label>
+                                    <p class="text-gray-900 dark:text-white">{{ project.factory_code }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Created By</label>
+                                    <p class="text-gray-900 dark:text-white">{{ project.created_by_username }}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Start Date</label>
+                                    <p class="text-gray-900 dark:text-white">{{ project.start_date }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">End Date</label>
+                                    <p class="text-gray-900 dark:text-white">{{ project.end_date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products & Models Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-purple-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Products & Models</h3>
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Products</label>
+                                {% if project.selected_products %}
+                                    <div class="space-y-2">
+                                        {% for product in project.selected_products %}
+                                            <div class="flex items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                                <i class="fas fa-box text-gray-400 mr-2"></i>
+                                                <span class="text-gray-900 dark:text-white">{{ product }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <p class="text-gray-500 dark:text-gray-400 italic text-sm">No products selected</p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Models</label>
+                                {% if project.selected_models %}
+                                    <div class="space-y-2">
+                                        {% for model in project.selected_models %}
+                                            <div class="flex items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                                <i class="fas fa-cube text-gray-400 mr-2"></i>
+                                                <span class="text-gray-900 dark:text-white">{{ model }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <p class="text-gray-500 dark:text-gray-400 italic text-sm">No models selected</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parameters & Costs Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-green-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Cost Parameters</h3>
+                    </div>
+                    <div class="p-5">
+                        {% if display_parameters %}
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Parameter</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Before</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">After</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        {% for param in display_parameters %}
+                                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                            <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-900 dark:text-white">{{ param.name }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ param.before_value }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ param.after_value }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap font-semibold text-green-600 dark:text-green-400" data-pkr="{{ param.cost }}">
+                                                {{ param.cost }} PKR
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    <span class="font-medium">Investment Cost:</span> 
+                                    <span class="font-bold text-blue-600 dark:text-blue-400" data-pkr="{{ machinery_cost }}">{{ machinery_cost }} PKR</span>
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="text-center py-6">
+                                <i class="fas fa-exclamation-circle text-3xl text-gray-400 mb-3"></i>
+                                <p class="text-gray-500 dark:text-gray-400 mb-4">No parameters defined</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (1/3 width) -->
+            <div class="space-y-6">
+                <!-- Review Decision Card (Only for Pending projects) -->
+                {% if project.status == 'Pending' %}
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-orange-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Review Decision</h3>
+                    </div>
+                    <div class="p-5">
+                        <form method="POST" action="{{ url_for('manager_project_detail', project_id=project.project_id) }}">
+                            <div class="mb-4">
+                                <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Decision *
+                                </label>
+                                <select id="status" name="status" required
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors">
+                                    <option value="">Select decision</option>
+                                    <option value="Approved">✅ Approve Project</option>
+                                    <option value="Rejected">❌ Reject Project</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="comments" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Comments *
+                                </label>
+                                <textarea id="comments" name="comments" rows="4" required
+                                          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors resize-none"
+                                          placeholder="Add your review comments..."></textarea>
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-check mr-2"></i>Submit Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ROI Analysis Card -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+        <div class="w-9 h-9 bg-yellow-600 text-white rounded-lg flex items-center justify-center mr-3">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">ROI Analysis</h3>
+    </div>
+    <div class="p-5">
+        {% if project.roi_data %}
+            <div class="space-y-4">
+                <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Monthly Savings</p>
+                    <p class="text-xl font-bold text-green-700 dark:text-green-300">
+                        {{ project.roi_data.monthly_saving|numberformat(2) }} {{ currency }}
+                    </p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Payback Period</p>
+                    <p class="text-gray-900 dark:text-white">
+                        {% if project.roi_data.roi_month %}
+                            {{ project.roi_data.roi_month }} months
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4 space-y-2">
+                <a href="{{ url_for('manager_roi_table', project_id=project.project_id) }}" 
+                   class="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    <i class="fas fa-table mr-2"></i>View ROI Table
+                </a>
+                <a href="{{ url_for('export_roi', project_id=project.project_id|string) }}" 
+                   class="w-full inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                    <i class="fas fa-file-excel mr-2"></i>Export Report
+                </a>
+            </div>
+        {% else %}
+            <div class="text-center py-6">
+                <i class="fas fa-chart-line text-3xl text-gray-400 mb-3"></i>
+                <p class="text-gray-500 dark:text-gray-400">ROI data not available</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+                <!-- Milestones Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-purple-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Project Milestones</h3>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Track project progress and savings realization</p>
+                        <a href="{{ url_for('manager_milestones', project_id=project.project_id) }}"
+                           class="w-full inline-flex items-center justify-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors">
+                            <i class="fas fa-chart-bar mr-2"></i>View Milestones
+                        </a>
+                    </div>
+                </div>
+
+               <!-- Six Sigma Phase Card (Conditional) -->
+{% if project.get('project_type') == 'Six Sigma' %}
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+        <div class="w-9 h-9 bg-indigo-600 text-white rounded-lg flex items-center justify-center mr-3">
+            <i class="fas fa-project-diagram"></i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Six Sigma Phase</h3>
+    </div>
+    <div class="p-5">
+        <div class="mb-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Current Phase</p>
+            <p class="text-gray-900 dark:text-white font-medium">
+                {{ project.six_sigma_phase if project.six_sigma_phase else 'Not specified' }}
+            </p>
+        </div>
+        <div class="mt-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Phase History</p>
+            <div class="mt-2 space-y-2">
+                {% if project.phase_history %}
+                    {% for entry in project.phase_history %}
+                    <div class="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                        <span class="font-medium mr-2">{{ entry.phase }}:</span>
+                        <span class="text-gray-500 dark:text-gray-400">{{ entry.timestamp }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">No phase history available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+                <!-- Approval Details Card (Conditional) -->
+                {% if project.status == 'Approved' or project.status == 'Rejected' %}
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden transition-colors duration-300">
+                    <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex items-center">
+                        <div class="w-9 h-9 bg-gray-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Approval Details</h3>
+                    </div>
+                    <div class="p-5 space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Reviewed By</p>
+                            <p class="text-gray-900 dark:text-white">{{ project.reviewed_by_username if project.reviewed_by_username else 'N/A' }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Reviewed At</p>
+                            <p class="text-gray-900 dark:text-white">
+                                {% if project.reviewed_at %}{{ project.reviewed_at | datetimeformat }}{% else %}N/A{% endif %}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Manager Comments</p>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                <p class="text-gray-900 dark:text-white text-sm">{{ project.manager_comments if project.manager_comments else 'No comments provided.' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Action Buttons Footer -->
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="{{ url_for('manager_projects') }}" 
+               class="inline-flex items-center px-5 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Projects
+            </a>
+            
+            {% if project.status == 'Approved' %}
+            <a href="{{ url_for('export_project_report', project_id=project.project_id) }}" 
+               class="inline-flex items-center px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow transition-colors">
+                <i class="fas fa-file-pdf mr-2"></i>Export Full Report
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const currencySelect = document.getElementById('currency-select');
+    const monthSelect = document.getElementById('month-select');
+    const ytdDisplay = document.getElementById('ytd-display');
+    const conversionStatus = document.getElementById('conversion-status');
+    const resetBtn = document.getElementById('reset-currency');
+    
+    // Get current year
+    const currentYear = new Date().getFullYear();
+    
+    // Show status message
+    function showStatus(message, type = 'info') {
+        conversionStatus.className = `px-3 py-2 rounded-lg text-sm font-medium ${
+            type === 'error' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+            type === 'success' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+            'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+        }`;
+        conversionStatus.textContent = message;
+        conversionStatus.classList.remove('hidden');
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            conversionStatus.classList.add('hidden');
+        }, 3000);
+    }
+    
+    // Function to convert all PKR values on the page
+    async function convertCurrency() {
+        const currency = currencySelect.value;
+        const month = monthSelect.value;
+        
+        if (!currency) {
+            // Reset all values to PKR
+            document.querySelectorAll('[data-pkr]').forEach(el => {
+                const pkrValue = parseFloat(el.dataset.pkr);
+                el.textContent = pkrValue.toLocaleString('en-PK') + ' PKR';
+            });
+            ytdDisplay.classList.add('hidden');
+            ytdDisplay.textContent = '';
+            showStatus('Reset to PKR values', 'success');
+            return;
+        }
+        
+        try {
+            showStatus('Converting currency...', 'info');
+            
+            // Get conversion rates
+            const response = await fetch(`/api/convert?currency=${currency}&month=${month}&year=${currentYear}`);
+            const data = await response.json();
+            
+            if (!response.ok || !data || !data.rate) {
+                throw new Error(data?.error || 'Invalid currency data');
+            }
+            
+            // Display YTD info
+            ytdDisplay.textContent = `YTD (Jan-${month.slice(0, 3)}): 1 ${currency} = ${data.ytd.toFixed(2)} PKR`;
+            ytdDisplay.classList.remove('hidden');
+            
+            // Convert all PKR values on the page
+            document.querySelectorAll('[data-pkr]').forEach(el => {
+                const pkrValue = parseFloat(el.dataset.pkr);
+                const convertedValue = pkrValue / data.ytd;
+                el.textContent = convertedValue.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: currency,
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            });
+            
+            showStatus(`Converted to ${currency}`, 'success');
+        } catch (error) {
+            console.error('Currency conversion failed:', error);
+            showStatus(`Conversion failed: ${error.message}`, 'error');
+            ytdDisplay.classList.add('hidden');
+        }
+    }
+    
+    // Event listeners
+    currencySelect.addEventListener('change', convertCurrency);
+    monthSelect.addEventListener('change', convertCurrency);
+    resetBtn.addEventListener('click', () => {
+        currencySelect.value = '';
+        convertCurrency();
+    });
+    
+    // Set current month as default
+    const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+    if (monthSelect.querySelector(`option[value="${currentMonth}"]`)) {
+        monthSelect.value = currentMonth;
+    }
+});
+</script>
+{% endblock %}

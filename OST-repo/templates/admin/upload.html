@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}Data Upload - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                <i class="fas fa-upload text-red-600 dark:text-yellow-500 mr-3"></i>
+                Data Upload
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+                Upload factory data files to populate the system
+            </p>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border {% if category == 'success' %}bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200{% elif category == 'danger' %}bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200{% else %}bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200{% endif %} transition-colors duration-300">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %} mr-3"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Upload Form -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                    <i class="fas fa-cloud-upload-alt text-blue-600 dark:text-blue-400 mr-2"></i>Upload File
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">Select Excel or CSV files to import factory data</p>
+            </div>
+            <div class="p-6">
+                <form method="POST" action="{{ url_for('admin_upload') }}" enctype="multipart/form-data" id="upload-form" class="space-y-6">
+                    <!-- File Upload Area -->
+                    <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center hover:border-red-500 dark:hover:border-yellow-500 transition-colors">
+                        <div class="space-y-4">
+                            <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-file-upload text-2xl text-gray-400"></i>
+                            </div>
+                            <div>
+                                <label for="file" class="cursor-pointer">
+                                    <span class="text-lg font-medium text-gray-900 dark:text-white">Choose file to upload</span>
+                                    <input type="file" 
+                                           id="file" 
+                                           name="file" 
+                                           accept=".xlsx,.xls,.csv" 
+                                           required
+                                           class="sr-only">
+                                </label>
+                                <p class="text-gray-500 dark:text-gray-400 mt-2">or drag and drop</p>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Supported formats: Excel (.xlsx, .xls) and CSV (.csv)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- File Info Display -->
+                    <div id="file-info" class="hidden bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-file text-blue-600 dark:text-blue-400 mr-3"></i>
+                            <div>
+                                <p class="font-medium text-blue-900 dark:text-blue-300" id="file-name"></p>
+                                <p class="text-sm text-blue-700 dark:text-blue-400" id="file-size"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Button -->
+                    <div class="flex justify-center">
+                        <button type="submit" 
+                                id="upload-btn"
+                                class="bg-red-600 dark:bg-yellow-500 text-white dark:text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-red-700 dark:hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled>
+                            <i class="fas fa-upload mr-2"></i>Upload File
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Upload Guidelines -->
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6 mb-8">
+            <h3 class="text-lg font-medium text-yellow-900 dark:text-yellow-200 mb-4">
+                <i class="fas fa-info-circle mr-2"></i>Upload Guidelines
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-yellow-800 dark:text-yellow-300">
+                <div>
+                    <h4 class="font-medium mb-2">File Requirements:</h4>
+                    <ul class="space-y-1 text-xs">
+                        <li>• Maximum file size: 16MB</li>
+                        <li>• Supported formats: .xlsx, .xls, .csv</li>
+                        <li>• First row should contain headers</li>
+                        <li>• Data should be properly formatted</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-2">Expected Columns:</h4>
+                    <ul class="space-y-1 text-xs">
+                        <li>• Plant_Number (e.g., 6061, 6062, 6041)</li>
+                        <li>• Product_Name (or Product, Name, Item, Description)</li>
+                        <li>• Model (or Variant, SKU, ID)</li>
+                        <li>• Other cost parameters as needed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Data Template -->
+       <!-- In your template's download section: -->
+<div class="p-6 text-center">
+    <a href="{{ url_for('download_template') }}" 
+       class="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors inline-block"
+       download="factory_data_template.csv">
+        <i class="fas fa-download mr-2"></i>Download Template
+    </a>
+</div>
+            <div class="p-6 text-center">
+                <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-6 max-w-md mx-auto">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-4">
+                        <i class="fas fa-file-csv text-green-600 mr-2"></i>Factory Data Template
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                        CSV template with the correct factory data structure
+                    </p>
+                    <a href="{{ url_for('download_template') }}" 
+                       class="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors inline-block"
+                       id="download-template-btn"
+                       onclick="downloadTemplate(event)">
+                        <i class="fas fa-download mr-2"></i>Download Template
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // File upload handling
+    const fileInput = document.getElementById('file');
+    const fileInfo = document.getElementById('file-info');
+    const fileName = document.getElementById('file-name');
+    const fileSize = document.getElementById('file-size');
+    const uploadBtn = document.getElementById('upload-btn');
+    const uploadForm = document.getElementById('upload-form');
+
+    // Initialize file input handling
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.remove('hidden');
+            uploadBtn.disabled = false;
+        } else {
+            fileInfo.classList.add('hidden');
+            uploadBtn.disabled = true;
+        }
+    });
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Drag and drop functionality
+    const dropZone = document.querySelector('.border-dashed');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropZone.classList.add('border-red-500', 'dark:border-yellow-500');
+    }
+
+    function unhighlight(e) {
+        dropZone.classList.remove('border-red-500', 'dark:border-yellow-500');
+    }
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        if (files.length > 0) {
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change'));
+        }
+    }
+
+    // Enhanced download template function
+    function downloadTemplate(event) {
+        event.preventDefault();
+        const btn = document.getElementById('download-template-btn');
+        const originalText = btn.innerHTML;
+        
+        // Show loading state
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Preparing download...';
+        btn.disabled = true;
+
+        fetch("{{ url_for('download_template') }}")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'factory_data_template.csv';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            })
+            .catch(error => {
+                console.error('Download error:', error);
+                alert('Failed to download template. Please check console for details.');
+            })
+            .finally(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+    }
+
+    // Form submission handling
+    uploadForm.addEventListener('submit', function(e) {
+        if (!fileInput.files.length) {
+            e.preventDefault();
+            alert('Please select a file first');
+        }
+    });
+</script>
+{% endblock %}

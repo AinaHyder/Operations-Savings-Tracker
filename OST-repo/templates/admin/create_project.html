@@ -1,0 +1,458 @@
+{% extends "base.html" %}
+
+{% block title %}Create Project - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <i class="fas fa-project-diagram text-red-600 dark:text-yellow-500 mr-3"></i>
+                        Create New Project
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg {% if category == 'success' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% elif category == 'danger' %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200{% else %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% endif %}">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} mr-2"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <form action="{{ url_for('admin_create_project') }}" method="POST" class="p-6">
+                <!-- Project Information Section -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>Project Information
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="project_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Name</label>
+                            <input type="text" id="project_name" name="project_name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" placeholder="Enter project name" value="{{ project_data.project_name if project_data.project_name else '' }}" required>
+                        </div>
+                        <div>
+                            <label for="project_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Type</label>
+                            <select id="project_type" name="project_type" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" required onchange="toggleMachineryCost()">
+                                <option value="">Select Type</option>
+                                {% for category in project_categories %}
+                                    <option value="{{ category.name }}" {% if project_data.project_type == category.name %}selected{% endif %}>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="factory_code" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Factory</label>
+                            <select id="factory_code" name="factory_code" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" required onchange="updateProductAndParameterOptions()">
+                                <option value="">Select Factory</option>
+                                {% for factory in all_factories %}
+                                    <option value="{{ factory.factory_code }}" {% if project_data.factory_code == factory.factory_code %}selected{% endif %}>{{ factory.factory_code }} (Plant {{ factory.plant_number }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Start Date</label>
+                            <input type="date" id="start_date" name="start_date" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ project_data.start_date if project_data.start_date else '' }}" required>
+                        </div>
+                        <div>
+                            <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">End Date</label>
+                            <input type="date" id="end_date" name="end_date" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ project_data.end_date if project_data.end_date else '' }}" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="project_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Description</label>
+                            <textarea id="project_description" name="project_description" rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" placeholder="Enter project description" required>{{ project_data.project_description if project_data.project_description else '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products & Models Section -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-boxes text-blue-600 dark:text-blue-400 mr-2"></i>Products & Models
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="selected_products" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Products</label>
+                            <select id="selected_products" name="selected_products" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors h-40" multiple required>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Hold Ctrl/Cmd to select multiple items</p>
+                        </div>
+                        <div>
+                            <label for="selected_models" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Models</label>
+                            <select id="selected_models" name="selected_models" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors h-40" multiple required>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Hold Ctrl/Cmd to select multiple items</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Parameters Section -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-sliders-h text-blue-600 dark:text-blue-400 mr-2"></i>Project Parameters
+                    </h2>
+                    <div id="parameters-container" class="space-y-4">
+                        {% if project_data.project_parameters %}
+                            {% for param in project_data.project_parameters %}
+                                <div class="grid grid-cols-1 md:grid-cols-6 gap-4 items-end mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600" data-param-index="{{ loop.index0 }}">
+                                    <div>
+                                        <label for="param_name_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Parameter Name</label>
+                                        <select id="param_name_{{ loop.index0 }}" name="param_name[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" required onchange="updateParameterFields(this, {{ loop.index0 }})">
+                                            <option value="">Select Parameter</option>
+                                            {% if project_data.factory_code and project_data.factory_code in all_unit_costs %}
+                                                {% for uc in all_unit_costs[project_data.factory_code] %}
+                                                    <option value="{{ uc.name }}" {% if param.name == uc.name %}selected{% endif %}>{{ uc.name }}</option>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <option value="Custom" {% if param.is_custom %}selected{% endif %}>Custom</option>
+                                        </select>
+                                        <input type="hidden" name="is_custom_param_{{ loop.index0 }}" value="{{ 'true' if param.is_custom else 'false' }}">
+                                    </div>
+                                    <div>
+                                        <label for="param_unit_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Unit</label>
+                                        <input type="text" id="param_unit_{{ loop.index0 }}" name="param_unit[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ param.unit }}" {% if not param.is_custom %}readonly{% endif %} required>
+                                    </div>
+                                    <div>
+                                        <label for="param_cost_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cost ({{ currency }})</label>
+                                        <input type="number" step="0.01" id="param_cost_{{ loop.index0 }}" name="param_cost[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ param.cost }}" {% if not param.is_custom %}readonly{% endif %} required>
+                                    </div>
+                                    <div>
+                                        <label for="param_operator_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Operator</label>
+                                        <select id="param_operator_{{ loop.index0 }}" name="param_operator[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" {% if not param.is_custom %}readonly{% endif %} required>
+                                            <option value=">" {% if param.operator == '>' %}selected{% endif %}>&gt; Greater Than</option>
+                                            <option value="<" {% if param.operator == '<' %}selected{% endif %}>&lt; Less Than</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="param_before_value_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Before Value</label>
+                                        <input type="number" step="0.01" id="param_before_value_{{ loop.index0 }}" name="param_before_value[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ param.before_value }}" required>
+                                    </div>
+                                    <div>
+                                        <label for="param_after_value_{{ loop.index0 }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">After Value</label>
+                                        <input type="number" step="0.01" id="param_after_value_{{ loop.index0 }}" name="param_after_value[]" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" value="{{ param.after_value }}" required>
+                                    </div>
+                                    <div class="md:col-span-6 flex justify-end">
+                                        <button type="button" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium shadow transition duration-200 flex items-center remove-param-btn">
+                                            <i class="fas fa-trash mr-1"></i>Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <button type="button" id="add-parameter-btn" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-gray-200 rounded-lg font-medium shadow-md transition duration-200 flex items-center mt-4">
+                        <i class="fas fa-plus mr-2"></i>Add Parameter
+                    </button>
+                </div>
+
+                <!-- Machinery Cost Section -->
+                <div id="machinery-cost-section" class="mb-8 {% if project_data.project_type == 'Kaizen' %}hidden{% endif %}">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-cogs text-blue-600 dark:text-blue-400 mr-2"></i>Machinery/Investment Cost
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="machinery_cost" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cost ({{ currency }})</label>
+                            <input type="number" step="0.01" id="machinery_cost" name="machinery_cost" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors" placeholder="0.00" value="{{ project_data.machinery_cost if project_data.machinery_cost else 0 }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <a href="{{ url_for('admin_dashboard') }}" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-gray-200 rounded-lg font-medium shadow-md transition duration-200 flex items-center">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </a>
+                    <button type="submit" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium shadow-md transition duration-200 flex items-center">
+                        <i class="fas fa-save mr-2"></i>Create Project
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    {% endblock %}
+
+    <script>
+        // Global variables
+        const allProducts = {{ products | tojson }};
+        const allModels = {{ models | tojson }};
+        const allUnitCosts = {{ unit_costs | tojson }};
+        const allFactoryUnitCosts = {{ unit_costs_doc | tojson }};
+        const currency = "{{ currency }}";
+        let paramIndex = {{ project_data.project_parameters | length if project_data.project_parameters else 0 }};
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProductAndParameterOptions();
+            toggleMachineryCost();
+            
+            // Add parameter button event
+            document.getElementById('add-parameter-btn').addEventListener('click', addParameterRow);
+            
+            // Remove parameter button event delegation
+            document.getElementById('parameters-container').addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-param-btn')) {
+                    event.target.closest('.param-row').remove();
+                }
+            });
+        });
+
+        // Update products and models based on selected factory
+        function updateProductAndParameterOptions() {
+            const factoryCode = document.getElementById('factory_code').value;
+            const productSelect = document.getElementById('selected_products');
+            const modelSelect = document.getElementById('selected_models');
+            const parametersContainer = document.getElementById('parameters-container');
+
+            // Clear existing options
+            productSelect.innerHTML = '';
+            modelSelect.innerHTML = '';
+            
+            if (!factoryCode) {
+                parametersContainer.innerHTML = '';
+                paramIndex = 0;
+                return;
+            }
+
+            // Populate Products
+            const filteredProducts = allProducts.filter(p => p.factory_code === factoryCode);
+            filteredProducts.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.product_id;
+                option.textContent = product.name;
+                {% if project_data.selected_products %}
+                if ({{ project_data.selected_products | tojson }}.includes(product.product_id)) {
+                    option.selected = true;
+                }
+                {% endif %}
+                productSelect.appendChild(option);
+            });
+
+            // Update models based on selected products
+            updateModelOptions(Array.from(productSelect.selectedOptions).map(option => option.value));
+
+            // Add event listener for product select change
+            productSelect.addEventListener('change', function() {
+                const selectedProducts = Array.from(this.selectedOptions).map(option => option.value);
+                updateModelOptions(selectedProducts);
+            });
+
+            // Initialize parameters
+            initializeParameters();
+        }
+
+        // Update model options based on selected products
+        function updateModelOptions(selectedProducts) {
+            const modelSelect = document.getElementById('selected_models');
+            modelSelect.innerHTML = '';
+
+            if (selectedProducts.length === 0) return;
+
+            const filteredModels = allModels.filter(model => selectedProducts.includes(model.product_id));
+            filteredModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model.model_id;
+                option.textContent = model.name;
+                {% if project_data.selected_models %}
+                if ({{ project_data.selected_models | tojson }}.includes(model.model_id)) {
+                    option.selected = true;
+                }
+                {% endif %}
+                modelSelect.appendChild(option);
+            });
+        }
+
+        // Initialize parameters based on existing data or add empty row
+        function initializeParameters() {
+            const parametersContainer = document.getElementById('parameters-container');
+            const existingParams = {{ project_data.project_parameters | tojson }};
+
+            parametersContainer.innerHTML = '';
+            paramIndex = 0;
+
+            if (existingParams && existingParams.length > 0) {
+                existingParams.forEach(param => {
+                    addParameterRow(param);
+                });
+            } else {
+                addParameterRow();
+            }
+        }
+
+        // Add a new parameter row
+        function addParameterRow(paramData = null) {
+            const container = document.getElementById('parameters-container');
+            const factoryCode = document.getElementById('factory_code').value;
+            const currentFactoryUnitCosts = allFactoryUnitCosts[factoryCode] || [];
+            
+            const isCustom = paramData ? paramData.is_custom : false;
+            const selectedParamName = paramData ? paramData.name : '';
+            const selectedUnit = paramData ? paramData.unit : '';
+            const selectedCost = paramData ? paramData.cost : '';
+            const selectedOperator = paramData ? paramData.operator : '>';
+            const beforeValue = paramData ? paramData.before_value : '';
+            const afterValue = paramData ? paramData.after_value : '';
+
+            const row = document.createElement('div');
+            row.className = 'param-row';
+            row.setAttribute('data-param-index', paramIndex);
+            
+            let optionsHtml = '<option value="">Select Parameter</option>';
+            currentFactoryUnitCosts.forEach(uc => {
+                optionsHtml += `<option value="${uc.name}" ${selectedParamName === uc.name ? 'selected' : ''}>${uc.name}</option>`;
+            });
+            optionsHtml += `<option value="Custom" ${isCustom ? 'selected' : ''}>Custom</option>`;
+
+            row.innerHTML = `
+                <div>
+                    <label for="param_name_${paramIndex}" class="form-label">Parameter Name</label>
+                    <select id="param_name_${paramIndex}" name="param_name[]" 
+                            class="form-select param-name-select" required 
+                            onchange="updateParameterFields(this, ${paramIndex})">
+                        ${optionsHtml}
+                    </select>
+                    <input type="hidden" name="is_custom_param_${paramIndex}" value="${isCustom ? 'true' : 'false'}">
+                </div>
+                <div>
+                    <label for="param_unit_${paramIndex}" class="form-label">Unit</label>
+                    <input type="text" id="param_unit_${paramIndex}" name="param_unit[]" 
+                           class="form-input" value="${selectedUnit}" 
+                           ${isCustom ? '' : 'readonly'} required>
+                </div>
+                <div>
+                    <label for="param_cost_${paramIndex}" class="form-label">Cost (${currency})</label>
+                    <input type="number" step="0.01" id="param_cost_${paramIndex}" name="param_cost[]" 
+                           class="form-input" value="${selectedCost}" 
+                           ${isCustom ? '' : 'readonly'} required>
+                </div>
+                <div>
+                    <label for="param_operator_${paramIndex}" class="form-label">Operator</label>
+                    <select id="param_operator_${paramIndex}" name="param_operator[]" 
+                            class="form-select" ${isCustom ? '' : 'readonly'} required>
+                        <option value=">" ${selectedOperator === '>' ? 'selected' : ''}>&gt; Greater Than</option>
+                        <option value="<" ${selectedOperator === '<' ? 'selected' : ''}>&lt; Less Than</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="param_before_value_${paramIndex}" class="form-label">Before Value</label>
+                    <input type="number" step="0.01" id="param_before_value_${paramIndex}" 
+                           name="param_before_value[]" class="form-input" 
+                           value="${beforeValue}" required>
+                </div>
+                <div>
+                    <label for="param_after_value_${paramIndex}" class="form-label">After Value</label>
+                    <input type="number" step="0.01" id="param_after_value_${paramIndex}" 
+                           name="param_after_value[]" class="form-input" 
+                           value="${afterValue}" required>
+                </div>
+                <div class="md:col-span-6 flex justify-end">
+                    <button type="button" class="btn-danger remove-param-btn">
+                        <i class="fas fa-trash mr-1"></i>Remove
+                    </button>
+                </div>
+            `;
+
+            container.appendChild(row);
+
+            // If this is a custom parameter, replace the select with text input
+            if (isCustom) {
+                const selectElement = document.getElementById(`param_name_${paramIndex}`);
+                const customNameInput = document.createElement('input');
+                customNameInput.type = 'text';
+                customNameInput.id = `param_name_custom_${paramIndex}`;
+                customNameInput.name = `param_name[]`;
+                customNameInput.className = 'form-input mt-1';
+                customNameInput.value = selectedParamName;
+                customNameInput.placeholder = "Enter custom parameter name";
+                customNameInput.required = true;
+                selectElement.style.display = 'none';
+                selectElement.parentNode.insertBefore(customNameInput, selectElement.nextSibling);
+            }
+
+            paramIndex++;
+        }
+
+        // Update parameter fields based on selection
+        function updateParameterFields(selectElement, index) {
+            const selectedName = selectElement.value;
+            const unitInput = document.getElementById(`param_unit_${index}`);
+            const costInput = document.getElementById(`param_cost_${index}`);
+            const operatorSelect = document.getElementById(`param_operator_${index}`);
+            const isCustomHiddenInput = document.querySelector(`input[name="is_custom_param_${index}"]`);
+            const factoryCode = document.getElementById('factory_code').value;
+            const currentFactoryUnitCosts = allFactoryUnitCosts[factoryCode] || [];
+
+            // Remove existing custom name input if it exists
+            const existingCustomNameInput = document.getElementById(`param_name_custom_${index}`);
+            if (existingCustomNameInput) {
+                existingCustomNameInput.remove();
+                selectElement.style.display = 'block';
+            }
+
+            if (selectedName === 'Custom') {
+                // Replace select with text input for custom name
+                const customNameInput = document.createElement('input');
+                customNameInput.type = 'text';
+                customNameInput.id = `param_name_custom_${index}`;
+                customNameInput.name = `param_name[]`;
+                customNameInput.className = 'form-input mt-1';
+                customNameInput.placeholder = "Enter custom parameter name";
+                customNameInput.required = true;
+                selectElement.style.display = 'none';
+                selectElement.parentNode.insertBefore(customNameInput, selectElement.nextSibling);
+
+                // Enable editing of other fields
+                unitInput.value = '';
+                costInput.value = '';
+                operatorSelect.value = '>';
+                unitInput.readOnly = false;
+                costInput.readOnly = false;
+                operatorSelect.readOnly = false;
+                isCustomHiddenInput.value = 'true';
+            } else {
+                // Find the selected unit cost
+                const selectedUnitCost = currentFactoryUnitCosts.find(uc => uc.name === selectedName);
+                if (selectedUnitCost) {
+                    unitInput.value = selectedUnitCost.unit;
+                    costInput.value = selectedUnitCost.cost;
+                    operatorSelect.value = selectedUnitCost.operator || '>';
+                    unitInput.readOnly = true;
+                    costInput.readOnly = true;
+                    operatorSelect.readOnly = true;
+                    isCustomHiddenInput.value = 'false';
+                }
+            }
+        }
+
+        // Toggle machinery cost section based on project type
+        function toggleMachineryCost() {
+            const projectType = document.getElementById('project_type').value;
+            const machineryCostSection = document.getElementById('machinery-cost-section');
+            
+            if (projectType === 'Kaizen') {
+                machineryCostSection.classList.add('hidden');
+                document.getElementById('machinery_cost').value = 0;
+            } else {
+                machineryCostSection.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

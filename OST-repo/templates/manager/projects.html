@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}Manager Projects - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1">
+                        <i class="fas fa-tasks text-blue-600 dark:text-blue-400 mr-2"></i>
+                        Project Management
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Review, approve, and manage all cost reduction projects
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="{{ url_for('export_projects', project_type=request.args.get('project_type', ''), year=request.args.get('year', ''), month=request.args.get('month', '')) }}"
+                        class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                        <i class="fas fa-file-excel mr-2"></i>Export Excel
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- Total Projects Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Projects</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                            {{ summary_stats.total_projects }}
+                        </h3>
+                    </div>
+                    <div class="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-project-diagram text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estimated Savings Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estimated Savings</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                            {{ summary_stats.total_estimated_savings|numberformat }} {{ currency }}
+                        </h3>
+                    </div>
+                    <div class="p-3 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                        <i class="fas fa-coins text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Machinery Cost Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Machinery Cost</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                            {{ summary_stats.total_machinery_cost|numberformat }} {{ currency }}
+                        </h3>
+                    </div>
+                    <div class="p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                        <i class="fas fa-cogs text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved Projects Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Approved Projects</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                            {{ summary_stats.approved_projects }}
+                            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                ({{ (summary_stats.approved_projects / summary_stats.total_projects * 100)|round(1) if summary_stats.total_projects > 0 else 0 }}%)
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="p-3 rounded-lg bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700 mb-6">
+            <div class="p-4 md:p-6">
+                <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- Project Type Filter -->
+                    <div>
+                        <label for="project_type"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-tag text-gray-400 mr-2"></i>Project Type
+                        </label>
+                        <select id="project_type" name="project_type"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            <option value="">All Types</option>
+                            {% for category in project_categories %}
+                                <option value="{{ category.name }}" 
+                                    {% if request.args.get('project_type') == category.name %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Year Filter -->
+                    <div>
+                        <label for="year" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>Year
+                        </label>
+                        <select id="year" name="year"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            <option value="">All Years</option>
+                            {% for year in range(current_year, current_year - 5, -1) %}
+                                <option value="{{ year }}" {% if request.args.get('year') == year|string %}selected{% endif %}>
+                                    {{ year }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Month Filter -->
+                    <div>
+                        <label for="month" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-calendar text-gray-400 mr-2"></i>Month
+                        </label>
+                        <select id="month" name="month"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            <option value="">All Months</option>
+                            {% for month_num in range(1, 13) %}
+                                <option value="{{ month_num }}" {% if request.args.get('month') == month_num|string %}selected{% endif %}>
+                                    {{ month_names[month_num - 1] if month_names else month_num }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Last Updated -->
+                    <div class="flex items-end">
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            Last updated: {{ now.strftime('%Y-%m-%d %H:%M') if now is defined else 'N/A' }}
+                        </div>
+                    </div>
+
+                    <!-- Apply Filters Button -->
+                    <div class="md:col-span-4 flex justify-end">
+                        <button type="submit"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                            <i class="fas fa-filter mr-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+            <div class="p-4 md:p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                            <i class="fas fa-list text-blue-600 dark:text-blue-400 mr-2"></i>All Projects
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">{{ projects|length }} project(s) found</p>
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        {% if now %}
+                        Last updated: {{ now.strftime('%Y-%m-%d %H:%M') }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                {% if projects %}
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Project</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Type</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Factory</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Status</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Created By</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Created</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {% for project in projects %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div
+                                        class="flex-shrink-0 h-10 w-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-project-diagram text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                            <a href="{{ url_for('manager_project_detail', project_id=project.project_id) }}"
+                                                class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                                {{ project.project_name or 'Untitled Project' }}
+                                            </a>
+                                        </div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">
+                                            ID: {{ project.project_id }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                    {{ project.project_type or 'N/A' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                {{ project.factory_code or 'N/A' }}
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    {% if project.status == 'Approved' %}
+                                        bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300
+                                    {% elif project.status == 'Pending' %}
+                                        bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300
+                                    {% elif project.status == 'Rejected' %}
+                                        bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300
+                                    {% else %}
+                                        bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300
+                                    {% endif %}">
+                                    <i class="fas 
+                                        {% if project.status == 'Approved' %}fa-check-circle
+                                        {% elif project.status == 'Pending' %}fa-clock
+                                        {% elif project.status == 'Rejected' %}fa-times-circle
+                                        {% else %}fa-question-circle
+                                        {% endif %} mr-1"></i>
+                                    {{ project.status or 'N/A' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                <div class="flex items-center">
+                                    <div
+                                        class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center mr-2">
+                                        <i class="fas fa-user text-gray-600 dark:text-gray-300 text-xs"></i>
+                                    </div>
+                                    {{ project.created_by_username or 'N/A' }}
+                                </div>
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                {% if project.created_at %}
+                                    {% if project.created_at is string %}
+                                        {{ project.created_at.split(' ')[0] }}
+                                    {% else %}
+                                        {{ project.created_at.strftime('%Y-%m-%d') }}
+                                    {% endif %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex items-center space-x-3">
+                                    <a href="{{ url_for('manager_project_detail', project_id=project.project_id) }}"
+                                        class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    {% if project.status == 'Pending' %}
+                                    <a href="{{ url_for('manager_project_detail', project_id=project.project_id) }}?action=approve"
+                                        class="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors"
+                                        title="Approve">
+                                        <i class="fas fa-check-circle"></i>
+                                    </a>
+                                    {% endif %}
+                                    <a href="{{ url_for('user_delete_project', project_id=project.project_id) }}"
+                                        class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 transition-colors"
+                                        title="Delete"
+                                        onclick="return confirm('Are you sure you want to delete this project?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="text-center py-12">
+                    <div
+                        class="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-project-diagram text-2xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No projects found</h3>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">No projects match your current filters.
+                        Try adjusting your search criteria.</p>
+                    <a href="{{ url_for('manager_projects') }}"
+                        class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium">
+                        <i class="fas fa-sync-alt mr-2"></i>Reset Filters
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% if projects %}
+            <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 text-right">
+                <nav class="inline-flex">
+                    <!-- Pagination would go here -->
+                </nav>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

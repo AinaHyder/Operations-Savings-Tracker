@@ -1,0 +1,788 @@
+{% extends "base.html" %}
+
+{% block title %}Milestone View - {{ project.project_name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <i class="fas fa-flag-checkered text-purple-600 dark:text-purple-400 mr-3"></i>
+                        Milestone View
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">{{ project.project_name }}</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                        <i class="fas fa-flag-checkered mr-2"></i>
+                        Progress Tracking
+                    </span>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-30 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt text-purple-600 dark:text-purple-400 mr-3"></i>
+                    <span class="text-purple-800 dark:text-purple-300 font-medium">
+                        Project Duration: 
+                        {% if project.start_date %}
+                            {{ project.start_date.strftime('%Y-%m-%d') if project.start_date is not string else project.start_date.split(' ')[0] }}
+                        {% else %}
+                            Start date not specified
+                        {% endif %}
+                        to
+                        {% if project.end_date %}
+                            {{ project.end_date.strftime('%Y-%m-%d') if project.end_date is not string else project.end_date.split(' ')[0] }}
+                        {% else %}
+                            End date not specified
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border {% if category == 'success' %}bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200{% elif category == 'danger' %}bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200{% else %}bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200{% endif %} transition-all duration-300">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %} mr-3"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Cost Savings Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Forecasted Cost Savings Card -->
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-blue-800 dark:text-blue-200 mb-1">Total Forecasted Cost Savings</h3>
+                        <p class="text-sm text-blue-600 dark:text-blue-300 savings-description">Based on projected parameter values</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-700 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-line text-blue-600 dark:text-blue-300 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-3xl font-bold text-blue-900 dark:text-blue-100 cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ forecasted_cost_savings_total }}{% else %}0{% endif %}">
+                        {% if project_parameters and project_parameters[0].cost %}
+                            {{ forecasted_cost_savings_total | numberformat }} PKR
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Actual Cost Savings Card -->
+            <div class="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl shadow-lg p-6 border border-green-200 dark:border-green-700 transition-all duration-300 hover:shadow-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-green-800 dark:text-green-200 mb-1">Total Actual Cost Savings</h3>
+                        <p class="text-sm text-green-600 dark:text-green-300 savings-description">Based on realized parameter values</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-700 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check-circle text-green-600 dark:text-green-300 text-xl"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-3xl font-bold text-green-900 dark:text-green-100 cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ actual_cost_savings_total }}{% else %}0{% endif %}">
+                        {% if project_parameters and project_parameters[0].cost %}
+                            {{ actual_cost_savings_total | numberformat }} PKR
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Currency Converter Bar -->
+        <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 border border-purple-200 dark:border-gray-600 rounded-xl shadow-sm mb-6 transition-all duration-300">
+            <div class="px-6 py-4">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-1">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exchange-alt text-sm"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Currency Converter</span>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <label for="currency-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Currency:</label>
+                                <select id="currency-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 hover:border-purple-400 dark:hover:border-purple-500">
+                                    <option value="">PKR (Default)</option>
+                                    {% for currency_item in currencies %}
+                                    <option value="{{ currency_item.currency_name }}">{{ currency_item.currency_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <label for="month-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Month:</label>
+                                <select id="month-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 hover:border-purple-400 dark:hover:border-purple-500">
+                                    {% for month in months %}
+                                    <option value="{{ month }}" {% if month == current_month %}selected{% endif %}>{{ month }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="ytd-display" class="hidden px-3 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-lg text-sm font-medium border border-purple-200 dark:border-purple-700">
+                            <!-- YTD info will appear here -->
+                        </div>
+                        
+                        <div id="conversion-status" class="hidden px-3 py-2 rounded-lg text-sm font-medium">
+                            <!-- Status messages will appear here -->
+                        </div>
+                    </div>
+                    
+                    <button id="reset-currency" class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-all duration-200 transform hover:scale-105 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                        <i class="fas fa-undo mr-2"></i>Reset to PKR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Forecasted Savings Chart -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-300">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Forecasted Monthly Savings</h2>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Planned savings progression</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="h-80">
+                        <canvas id="forecastedSavingsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual vs Forecasted Chart -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-300">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Actual vs. Forecasted Savings</h2>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Performance comparison</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="h-80">
+                        <canvas id="actualForecastChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tables Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Forecasted Data Table -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-300">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-table"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Forecasted Monthly Data</h2>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Planned savings breakdown</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Month</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total Value</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Cost Savings</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Entry Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            {% for month_data in forecasted_data %}
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                    {{ month_data.month }} {{ month_data.year }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                    {{ month_data.totalValue | numberformat }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ month_data.totalValue * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                    {% if project_parameters and project_parameters[0].cost %}
+                                        {{ (month_data.totalValue * project_parameters[0].cost) | numberformat }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {% if month_data.userEnteredMonthly %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% endif %}">
+                                        {% if month_data.userEnteredMonthly %}Monthly Total{% else %}By Day{% endif %}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {% if not month_data.userEnteredMonthly %}
+                                    <button type="button" 
+                                            class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                                            onclick="toggleDailyDetails('forecast-{{ loop.index }}')">
+                                        <i class="fas fa-eye mr-1"></i>View Daily
+                                    </button>
+                                    {% else %}
+                                    <span class="text-gray-400">N/A</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if not month_data.userEnteredMonthly %}
+                            <tr id="daily-details-forecast-{{ loop.index }}" class="hidden bg-gray-50 dark:bg-gray-700">
+                                <td colspan="5" class="px-6 py-4">
+                                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                                        <h4 class="text-md font-semibold text-gray-900 dark:text-white mb-3">Daily Breakdown for {{ month_data.month }} {{ month_data.year }}</h4>
+                                        <div class="overflow-x-auto">
+                                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                                    <tr>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Day</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Value</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Cost Savings</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Notes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                    {% for day in month_data.days %}
+                                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ day.day }}</td>
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-white">{{ day.value | numberformat }}</td>
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ day.value * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                                            {% if project_parameters and project_parameters[0].cost %}
+                                                                {{ (day.value * project_parameters[0].cost) | numberformat }}
+                                                            {% else %}
+                                                                N/A
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">{{ day.notes or '-' }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- Total Row for Forecasted Data -->
+                            <tr class="bg-gray-100 dark:bg-gray-700 font-semibold">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Total</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                    {{ forecasted_total | numberformat }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ forecasted_total * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                    {% if project_parameters and project_parameters[0].cost %}
+                                        {{ (forecasted_total * project_parameters[0].cost) | numberformat }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Actual Monthly Data Table -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-300">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-orange-600 text-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">Actual Monthly Data</h2>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Realized savings breakdown</p>
+                        </div>
+                    </div>
+                </div>
+                {% if actual_data %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Month</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total Value</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Cost Savings</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Entry Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            {% for month_data in actual_data %}
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                    {{ month_data.month }} {{ month_data.year }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                    {{ month_data.totalValue | numberformat }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ month_data.totalValue * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                    {% if project_parameters and project_parameters[0].cost %}
+                                        {{ (month_data.totalValue * project_parameters[0].cost) | numberformat }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {% if month_data.userEnteredMonthly %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% endif %}">
+                                        {% if month_data.userEnteredMonthly %}Monthly Total{% else %}By Day{% endif %}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {% if not month_data.userEnteredMonthly %}
+                                    <button type="button" 
+                                        class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                                        onclick="toggleDailyDetails('actual-{{ loop.index }}')">
+                                        <i class="fas fa-eye mr-1"></i>View Daily
+                                    </button>
+                                    {% else %}
+                                    <span class="text-gray-400">N/A</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if not month_data.userEnteredMonthly %}
+                            <tr id="daily-details-actual-{{ loop.index }}" class="hidden bg-gray-50 dark:bg-gray-700">
+                                <td colspan="5" class="px-6 py-4">
+                                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+                                        <h4 class="text-md font-semibold text-gray-900 dark:text-white mb-3">Daily Breakdown for {{ month_data.month }} {{ month_data.year }}</h4>
+                                        <div class="overflow-x-auto">
+                                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                                    <tr>
+                                                        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Day</th>
+                                                        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Value</th>
+                                                        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Cost Savings</th>
+                                                        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Notes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                    {% for day_entry in month_data.days %}
+                                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ day_entry.day }}</td>
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-white">{{ day_entry.value | numberformat }}</td>
+                                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ day_entry.value * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                                            {% if project_parameters and project_parameters[0].cost %}
+                                                                {{ (day_entry.value * project_parameters[0].cost) | numberformat }}
+                                                            {% else %}
+                                                                N/A
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">{{ day_entry.notes if day_entry.notes else '-' }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- Total Row for Actual Data -->
+                            <tr class="bg-gray-100 dark:bg-gray-700 font-semibold">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Total</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                    {{ actual_total | numberformat }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white cost-savings" data-pkr="{% if project_parameters and project_parameters[0].cost %}{{ actual_total * project_parameters[0].cost }}{% else %}0{% endif %}">
+                                    {% if project_parameters and project_parameters[0].cost %}
+                                        {{ (actual_total * project_parameters[0].cost) | numberformat }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="p-8 text-center">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-area text-3xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No actual monthly data</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">There's no actual data to display.</p>
+                    {% if project.status == 'Approved' %}
+                    <a href="{{ url_for('actual_timeline_input', project_id=project.project_id) }}" 
+                       class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Enter Actual Data
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="{{ url_for('manager_project_detail', project_id=project.project_id) }}" 
+               class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Project Details
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currencySelect = document.getElementById('currency-select');
+        const monthSelect = document.getElementById('month-select');
+        const ytdDisplay = document.getElementById('ytd-display');
+        const conversionStatus = document.getElementById('conversion-status');
+        const resetBtn = document.getElementById('reset-currency');
+        
+        // Get current year
+        const currentYear = new Date().getFullYear();
+        
+        // Show status message
+        function showStatus(message, type = 'info') {
+            conversionStatus.className = `px-3 py-2 rounded-lg text-sm font-medium ${
+                type === 'error' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                type === 'success' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+            }`;
+            conversionStatus.textContent = message;
+            conversionStatus.classList.remove('hidden');
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                conversionStatus.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Function to convert all PKR values on the page (only for cost savings)
+        async function convertCurrency() {
+            const currency = currencySelect.value;
+            const month = monthSelect.value;
+            
+            if (!currency) {
+                // Reset cost savings to PKR values
+                document.querySelectorAll('.cost-savings').forEach(el => {
+                    const pkrValue = parseFloat(el.dataset.pkr);
+                    el.textContent = pkrValue.toLocaleString('en-PK') + ' PKR';
+                });
+                
+                // Reset descriptions
+                document.querySelectorAll('.savings-description').forEach(el => {
+                    const parent = el.closest('.bg-gradient-to-r');
+                    if (parent.classList.contains('from-blue-50')) {
+                        el.textContent = 'Based on projected parameter values';
+                    } else {
+                        el.textContent = 'Based on realized parameter values';
+                    }
+                });
+                
+                ytdDisplay.classList.add('hidden');
+                ytdDisplay.textContent = '';
+                showStatus('Reset to PKR values', 'success');
+                return;
+            }
+            
+            try {
+                showStatus('Converting currency...', 'info');
+                
+                // Get conversion rates
+                const response = await fetch(`/api/convert?currency=${currency}&month=${month}&year=${currentYear}`);
+                const data = await response.json();
+                
+                if (!response.ok || !data || !data.rate) {
+                    throw new Error(data?.error || 'Invalid currency data');
+                }
+                
+                // Display YTD info
+                ytdDisplay.textContent = `YTD (Jan-${month.slice(0, 3)}): 1 ${currency} = ${data.ytd.toFixed(2)} PKR`;
+                ytdDisplay.classList.remove('hidden');
+                
+                // Convert cost savings values only
+                document.querySelectorAll('.cost-savings').forEach(el => {
+                    const pkrValue = parseFloat(el.dataset.pkr);
+                    const convertedValue = pkrValue / data.ytd;
+                    el.textContent = convertedValue.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency,
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                });
+                
+                // Update descriptions
+                document.querySelectorAll('.savings-description').forEach(el => {
+                    el.textContent = `Based on ${currency} conversion`;
+                });
+                
+                showStatus(`Converted to ${currency}`, 'success');
+            } catch (error) {
+                console.error('Currency conversion failed:', error);
+                showStatus(`Conversion failed: ${error.message}`, 'error');
+                ytdDisplay.classList.add('hidden');
+            }
+        }
+        
+        // Event listeners
+        currencySelect.addEventListener('change', convertCurrency);
+        monthSelect.addEventListener('change', convertCurrency);
+        resetBtn.addEventListener('click', () => {
+            currencySelect.value = '';
+            convertCurrency();
+        });
+        
+        // Set current month as default
+        const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+        if (monthSelect.querySelector(`option[value="${currentMonth}"]`)) {
+            monthSelect.value = currentMonth;
+        }
+
+        // Prepare project data for JavaScript
+        const projectData = {
+            forecasted_data: {{ forecasted_data | tojson | safe }},
+            actual_data: {{ actual_data | tojson | safe }},
+            project_name: "{{ project.project_name }}",
+            start_date: "{% if project.start_date %}{{ project.start_date.strftime('%Y-%m-%d') if project.start_date is not string else project.start_date.split(' ')[0] }}{% endif %}",
+            end_date: "{% if project.end_date %}{{ project.end_date.strftime('%Y-%m-%d') if project.end_date is not string else project.end_date.split(' ')[0] }}{% endif %}"
+        };
+        const currency = "{{ currency }}";
+
+        // Forecasted Savings Chart
+        if (projectData.forecasted_data && projectData.forecasted_data.length > 0) {
+            const forecastedLabels = projectData.forecasted_data.map(m => m.month + ' ' + m.year);
+            const forecastedValues = projectData.forecasted_data.map(m => m.totalValue);
+            const forecastedCtx = document.getElementById('forecastedSavingsChart').getContext('2d');
+            
+            new Chart(forecastedCtx, {
+                type: 'bar',
+                data: {
+                    labels: forecastedLabels,
+                    datasets: [{
+                        label: 'Forecasted Savings (' + currency + ')',
+                        data: forecastedValues,
+                        backgroundColor: 'rgba(79, 70, 229, 0.7)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 2,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (' + currency + ')',
+                                color: '#6B7280'
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            },
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.3)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            document.getElementById('forecastedSavingsChart').closest('.bg-white').innerHTML = `
+                <div class="text-center py-12">
+                    <i class="fas fa-chart-bar text-4xl text-gray-400 mb-4"></i>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">No forecasted data available</h3>
+                    <p class="text-gray-500 dark:text-gray-400">There's no forecasted data to display chart.</p>
+                </div>
+            `;
+        }
+
+        // Actual vs Forecasted Chart
+        if (projectData.forecasted_data && projectData.forecasted_data.length > 0) {
+            const labels = projectData.forecasted_data.map(m => m.month + ' ' + m.year);
+            const forecastedData = projectData.forecasted_data.map(m => m.totalValue);
+            
+            // Create actual data array that matches the forecasted months
+            let actualData = new Array(projectData.forecasted_data.length).fill(null);
+            
+            if (projectData.actual_data && projectData.actual_data.length > 0) {
+                projectData.actual_data.forEach((actualMonth, index) => {
+                    const matchingIndex = projectData.forecasted_data.findIndex(
+                        forecastMonth => forecastMonth.month === actualMonth.month && forecastMonth.year === actualMonth.year
+                    );
+                    if (matchingIndex !== -1) {
+                        actualData[matchingIndex] = actualMonth.totalValue;
+                    }
+                });
+            }
+
+            const actualForecastCtx = document.getElementById('actualForecastChart').getContext('2d');
+            
+            new Chart(actualForecastCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Forecasted (' + currency + ')',
+                            data: forecastedData,
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            fill: false,
+                            pointBackgroundColor: 'rgba(79, 70, 229, 1)',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        },
+                        {
+                            label: 'Actual (' + currency + ')',
+                            data: actualData,
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            fill: false,
+                            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                color: '#6B7280'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1,
+                            cornerRadius: 8
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (' + currency + ')',
+                                color: '#6B7280'
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            },
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.3)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            document.getElementById('actualForecastChart').closest('.bg-white').innerHTML = `
+                <div class="text-center py-12">
+                    <i class="fas fa-chart-line text-4xl text-gray-400 mb-4"></i>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">No comparison data available</h3>
+                    <p class="text-gray-500 dark:text-gray-400">There's no data to compare actual vs forecasted.</p>
+                </div>
+            `;
+        }
+    });
+
+    function toggleDailyDetails(index) {
+        const row = document.getElementById(`daily-details-${index}`);
+        if (row) {
+            row.classList.toggle('hidden');
+            const button = document.querySelector(`button[onclick="toggleDailyDetails('${index}')"]`);
+            if (button) {
+                const icon = button.querySelector('i');
+                if (row.classList.contains('hidden')) {
+                    icon.className = 'fas fa-eye mr-1';
+                    button.innerHTML = '<i class="fas fa-eye mr-1"></i>View Daily';
+                } else {
+                    icon.className = 'fas fa-eye-slash mr-1';
+                    button.innerHTML = '<i class="fas fa-eye-slash mr-1"></i>Hide Daily';
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

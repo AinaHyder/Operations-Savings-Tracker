@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}{% if edit_mode %}Edit Account{% else %}Add Account{% endif %} - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                <i class="fas {% if edit_mode %}fa-user-edit{% else %}fa-user-plus{% endif %} text-red-600 dark:text-yellow-500 mr-3"></i>
+                {% if edit_mode %}Edit Account{% else %}Add New Account{% endif %}
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+                {% if edit_mode %}Update account information{% else %}Create a new account for the system{% endif %}
+            </p>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border {% if category == 'success' %}bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200{% elif category == 'danger' %}bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200{% else %}bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200{% endif %} transition-colors duration-300">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %} mr-3"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div class="p-8">
+                <form action="{% if edit_mode %}{{ url_for('admin_edit_account', role_type=account.role, user_id=account._id) }}{% else %}{{ url_for('admin_add_account') }}{% endif %}" method="POST" class="space-y-6">
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-user text-gray-400 mr-2"></i>Username *
+                        </label>
+                        <input type="text" 
+                               id="username" 
+                               name="username" 
+                               required
+                               value="{{ account.username if edit_mode else '' }}"
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                               placeholder="Enter username">
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            Username must be unique and contain only letters, numbers, and underscores
+                        </p>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-envelope text-gray-400 mr-2"></i>Email Address *
+                        </label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required
+                               value="{{ account.email if edit_mode else '' }}"
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                               placeholder="Enter email address">
+                    </div>
+
+                    <!-- Role -->
+                    <div>
+                        <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-user-tag text-gray-400 mr-2"></i>Role *
+                        </label>
+                        <select id="role" 
+                                name="role" 
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors">
+                            <option value="">Select role</option>
+                            <option value="admin" {% if edit_mode and account.role == 'admin' %}selected{% endif %}>Admin</option>
+                            <option value="manager" {% if edit_mode and account.role == 'manager' %}selected{% endif %}>Manager</option>
+                            <option value="user" {% if edit_mode and account.role == 'user' %}selected{% endif %}>User</option>
+                        </select>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            Choose the appropriate role based on user responsibilities
+                        </p>
+                    </div>
+
+                    <!-- Password (only required for add, optional for edit) -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-lock text-gray-400 mr-2"></i>Password {% if not edit_mode %}*{% else %}(Leave blank to keep current){% endif %}
+                        </label>
+                        <div class="relative">
+                            <input type="password" 
+                                   id="password" 
+                                   name="password" 
+                                   {% if not edit_mode %}required{% endif %}
+                                   minlength="6"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors pr-12"
+                                   placeholder="{% if edit_mode %}Enter new password{% else %}Enter password{% endif %}">
+                            <button type="button" 
+                                    id="togglePassword"
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fas fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            Password must be at least 6 characters long
+                        </p>
+                    </div>
+
+                    <!-- Account Status (only for edit mode) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-toggle-on text-gray-400 mr-2"></i>Account Status
+                        </label>
+                        <div class="flex items-center">
+                            <input type="checkbox" 
+                                   id="status" 
+                                   name="status" 
+                                   value="1"
+                                   {% if not edit_mode or account.status == 1 %}checked{% endif %}
+                                   class="h-4 w-4 text-red-600 dark:text-yellow-500 border-gray-300 dark:border-gray-600 rounded focus:ring-red-500 dark:focus:ring-yellow-500">
+                            <label for="status" class="ml-2 block text-sm text-gray-900 dark:text-white">Account is active</label>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            Inactive users cannot log in to the system
+                        </p>
+                    </div>
+
+                    <!-- User Info (only for edit mode) -->
+                    {% if edit_mode %}
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-6">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Account Information</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-600 dark:text-gray-400">
+                            <div>
+                                <strong>User ID:</strong> {{ account.id }}
+                            </div>
+                            <div>
+                                <strong>Created:</strong> {{ account.created_at.strftime('%Y-%m-%d %H:%M') if account.created_at else 'N/A' }}
+                            </div>
+                            {% if account.updated_at %}
+                            <div>
+                                <strong>Last Updated:</strong> {{ account.updated_at.strftime('%Y-%m-%d %H:%M') }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <button type="submit" 
+                                class="flex-1 bg-red-600 dark:bg-yellow-500 text-white dark:text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-red-700 dark:hover:bg-yellow-600 focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:ring-offset-2 transition-colors">
+                            <i class="fas {% if edit_mode %}fa-save{% else %}fa-user-plus{% endif %} mr-2"></i>{% if edit_mode %}Update Account{% else %}Create Account{% endif %}
+                        </button>
+                        <a href="{{ url_for('admin_manage_accounts', role_type=account.role if edit_mode else 'user') }}" 
+                           class="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-500 text-center transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Role Information -->
+        <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-blue-900 dark:text-blue-300 mb-4">
+                <i class="fas fa-info-circle mr-2"></i>Role Permissions
+            </h3>
+            <div class="space-y-3 text-sm text-blue-800 dark:text-blue-300">
+                <div class="flex items-start">
+                    <i class="fas fa-shield-alt text-red-500 mr-3 mt-0.5"></i>
+                    <div>
+                        <strong>Admin:</strong> Full system access including user management, project oversight, data uploads, and system configuration.
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-user-tie text-blue-500 mr-3 mt-0.5"></i>
+                    <div>
+                        <strong>Manager:</strong> Project review and approval, analytics dashboard, and team oversight capabilities.
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-user text-green-500 mr-3 mt-0.5"></i>
+                    <div>
+                        <strong>User:</strong> Create and manage personal projects, view project details, and track progress.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Password toggle functionality
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordField = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+        
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const passwordField = document.getElementById('password');
+        const password = passwordField ? passwordField.value.trim() : '';
+        const role = document.getElementById('role').value;
+        
+        if (!username || !email || !role || (!{{ 'true' if not edit_mode else 'false' }} && !password)) {
+            e.preventDefault();
+            alert('Please fill in all required fields.');
+            return false;
+        }
+        
+        if (password && password.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters long.');
+            return false;
+        }
+        
+        // Username validation
+        const usernameRegex = /^[a-zA-Z0-9_]+$/;
+        if (!usernameRegex.test(username)) {
+            e.preventDefault();
+            alert('Username can only contain letters, numbers, and underscores.');
+            return false;
+        }
+    });
+</script>
+{% endblock %}

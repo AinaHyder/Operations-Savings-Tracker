@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Unit Costs - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <i class="fas fa-dollar-sign text-red-600 dark:text-yellow-500 mr-3"></i>
+                        Unit Costs Management
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Manage cost parameters for different factories
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg {% if category == 'success' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% elif category == 'danger' %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200{% else %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200{% endif %}">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} mr-2"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                    <i class="fas fa-cog text-blue-600 dark:text-blue-400 mr-2"></i>Configure Unit Costs
+                </h2>
+            </div>
+            
+            <div class="p-6">
+                <!-- Factory Selector -->
+                <div class="mb-6">
+                    <label for="factory_selector" class="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300">Select Factory</label>
+                    <select id="factory_selector" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" onchange="displayUnitCosts()">
+                        <option value="DPL1">DPL1</option>
+                        <option value="DPL2">DPL2</option>
+                        <option value="URIL">URIL</option>
+                    </select>
+                </div>
+
+                <form id="unit_cost_form" action="{{ url_for('admin_unit_costs') }}" method="POST">
+                    <input type="hidden" name="factory_code" id="selected_factory_code">
+                    
+                    <div class="flex items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Current Parameters for</h2>
+                        <span id="current_factory_display" class="ml-2 px-3 py-1 bg-red-600 text-white rounded-full text-sm font-medium dark:bg-yellow-500 dark:text-gray-900">DPL1</span>
+                    </div>
+                    
+                    <div id="parameters-container" class="space-y-4">
+                        <!-- Parameter rows will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <button type="button" id="add-parameter-btn" class="flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition-colors dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200">
+                            <i class="fas fa-plus-circle mr-2"></i> Add New Parameter
+                        </button>
+                        <button type="submit" class="flex items-center px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors shadow-md dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:text-gray-900">
+                            <i class="fas fa-save mr-2"></i> Save Unit Costs
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const unitCostsData = {{ unit_costs | tojson }};
+    const currency = "{{ currency }}";
+    let paramIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        displayUnitCosts();
+        document.getElementById('add-parameter-btn').addEventListener('click', addParameterRow);
+        document.getElementById('parameters-container').addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-param-btn')) {
+                event.target.closest('.param-row').remove();
+            }
+        });
+    });
+
+    function displayUnitCosts() {
+        const factorySelector = document.getElementById('factory_selector');
+        const selectedFactory = factorySelector.value;
+        document.getElementById('selected_factory_code').value = selectedFactory;
+        document.getElementById('current_factory_display').textContent = selectedFactory;
+        document.getElementById('current_factory_display').className = 'ml-2 px-3 py-1 bg-red-600 text-white rounded-full text-sm font-medium dark:bg-yellow-500 dark:text-gray-900';
+
+        const container = document.getElementById('parameters-container');
+        container.innerHTML = '';
+        paramIndex = 0;
+
+        const costs = unitCostsData[selectedFactory] || [];
+        if (costs.length > 0) {
+            costs.forEach(param => {
+                addParameterRow(param);
+            });
+        } else {
+            addParameterRow();
+        }
+    }
+
+    function addParameterRow(paramData = null) {
+        const container = document.getElementById('parameters-container');
+        const newRow = document.createElement('div');
+        newRow.classList.add('param-row', 'bg-gray-50', 'p-4', 'rounded-lg', 'border', 'border-gray-200', 'dark:bg-gray-700', 'dark:border-gray-600');
+        newRow.setAttribute('data-param-index', paramIndex);
+
+        const name = paramData ? paramData.name : '';
+        const unit = paramData ? paramData.unit : '';
+        const cost = paramData ? paramData.cost : '';
+        const operator = paramData ? paramData.operator : '>';
+
+        newRow.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label for="param_name_${paramIndex}" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Parameter Name</label>
+                    <input type="text" id="param_name_${paramIndex}" name="param_name[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white" value="${name}" required>
+                </div>
+                <div>
+                    <label for="param_unit_${paramIndex}" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Unit</label>
+                    <input type="text" id="param_unit_${paramIndex}" name="param_unit[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white" value="${unit}" required>
+                </div>
+                <div>
+                    <label for="param_cost_${paramIndex}" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Cost (${currency})</label>
+                    <input type="number" step="0.01" id="param_cost_${paramIndex}" name="param_cost[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white" value="${cost}" required>
+                </div>
+                <div class="flex items-end space-x-2">
+                    <div class="flex-1">
+                        <label for="param_operator_${paramIndex}" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Operator</label>
+                        <select id="param_operator_${paramIndex}" name="param_operator[]" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white" required>
+                            <option value=">" ${operator === '>' ? 'selected' : ''}>Greater Than (>)</option>
+                            <option value="<" ${operator === '<' ? 'selected' : ''}>Less Than (<)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="remove-param-btn px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-md transition-colors dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-200">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(newRow);
+        paramIndex++;
+    }
+</script>
+{% endblock %}

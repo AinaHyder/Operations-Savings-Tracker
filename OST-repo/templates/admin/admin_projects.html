@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Projects - Dawlance Cost Reduction Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <i class="fas fa-project-diagram text-red-600 dark:text-yellow-500 mr-3"></i>
+                        Manage Projects
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        View, edit, and manage all cost reduction projects
+                    </p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="{{ url_for('export_projects') }}" 
+                       class="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                        <i class="fas fa-file-excel mr-2"></i>Export Excel
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
+            <div class="p-6">
+                <form method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="year" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>Year
+                        </label>
+                        <select id="year" name="year" 
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors">
+                            <option value="">All Years</option>
+                            <option value="2024" {% if request.args.get('year') == '2024' %}selected{% endif %}>2024</option>
+                            <option value="2023" {% if request.args.get('year') == '2023' %}selected{% endif %}>2023</option>
+                            <option value="2022" {% if request.args.get('year') == '2022' %}selected{% endif %}>2022</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="month" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <i class="fas fa-calendar text-gray-400 mr-2"></i>Month
+                        </label>
+                        <select id="month" name="month" 
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 dark:focus:ring-yellow-500 focus:border-transparent transition-colors">
+                            <option value="">All Months</option>
+                            {% for i in range(1, 13) %}
+                            <option value="{{ i }}" {% if request.args.get('month') == i|string %}selected{% endif %}>
+                                {{ calendar.month_name[i] }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit" 
+                                class="w-full bg-red-600 dark:bg-yellow-500 text-white dark:text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-red-700 dark:hover:bg-yellow-600 transition-colors">
+                            <i class="fas fa-filter mr-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                    <i class="fas fa-list text-blue-600 dark:text-blue-400 mr-2"></i>All Projects
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">{{ projects|length }} project(s) found</p>
+            </div>
+            <div class="overflow-x-auto">
+                {% if projects %}
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Project</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Factory</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Created By</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Created</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {% for project in projects %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ project.project_name or 'Untitled Project' }}
+                                    </div>
+                                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                                        ID: {{ project.id }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                {{ project.project_type or 'N/A' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                {{ project.factory or 'N/A' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    {% if project.status == 'Approved' %}
+                                        bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300
+                                    {% elif project.status == 'Pending' %}
+                                        bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300
+                                    {% elif project.status == 'Rejected' %}
+                                        bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300
+                                    {% else %}
+                                        bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300
+                                    {% endif %}">
+                                    {{ project.status or 'Draft' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                {{ project.created_by_username or 'N/A' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                {{ project.created_at.split(' ')[0] if project.created_at else 'N/A' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex items-center space-x-2">
+                                    <a href="#" 
+                                       class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" 
+                                       class="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" 
+                                       class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 transition-colors"
+                                       onclick="return confirm('Are you sure you want to delete this project?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="text-center py-12">
+                    <div class="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-project-diagram text-3xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No projects found</h3>
+                    <p class="text-gray-600 dark:text-gray-400">No projects match your current filters.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

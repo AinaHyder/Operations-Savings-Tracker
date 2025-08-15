@@ -1,0 +1,10 @@
+Flask==3.0.3
+Flask-Moment==1.0.2
+Werkzeug==3.0.3
+Flask-PyMongo==2.3.0
+pymongo==4.6.3
+openpyxl==3.1.5
+pandas==2.2.3
+reportlab==4.2.0
+python-dateutil==2.9.0
+Jinja2==3.1.4

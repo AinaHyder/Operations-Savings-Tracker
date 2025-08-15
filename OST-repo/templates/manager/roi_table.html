@@ -1,0 +1,519 @@
+{% extends "base.html" %}
+
+{% block title %}ROI Table - {{ project.project_name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <i class="fas fa-chart-line text-blue-600 dark:text-blue-400 mr-3"></i>
+                        ROI Analysis
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">{{ project.project_name }}</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Financial Analysis
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border {% if category == 'success' %}bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200{% elif category == 'danger' %}bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200{% else %}bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-200{% endif %} transition-all duration-300">
+                            <div class="flex items-center">
+                                <i class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'danger' %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %} mr-3"></i>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Enhanced Currency Converter Bar -->
+        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-700 border border-blue-200 dark:border-gray-600 rounded-xl shadow-sm mb-6 transition-all duration-300">
+            <div class="px-6 py-4">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-1">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exchange-alt text-sm"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Currency Converter</span>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <label for="currency-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Currency:</label>
+                                <select id="currency-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500">
+                                    <option value="">PKR (Default)</option>
+                                    {% for currency_item in currencies %}
+                                    <option value="{{ currency_item.currency_name }}">{{ currency_item.currency_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <label for="month-select" class="text-sm font-medium text-gray-600 dark:text-gray-400">Month:</label>
+                                <select id="month-select" class="px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500">
+                                    {% for month in months %}
+                                    <option value="{{ month }}" {% if month == current_month %}selected{% endif %}>{{ month }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="ytd-display" class="hidden px-3 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-700">
+                            <!-- YTD info will appear here -->
+                        </div>
+                        
+                        <div id="conversion-status" class="hidden px-3 py-2 rounded-lg text-sm font-medium">
+                            <!-- Status messages will appear here -->
+                        </div>
+                    </div>
+                    
+                    <button id="reset-currency" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200 transform hover:scale-105 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <i class="fas fa-undo mr-2"></i>Reset to PKR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-l-4 border-blue-500 transition-colors duration-300">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dollar-sign text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Annual Saving</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white" data-pkr="{{ roi_data['annual_saving'] }}">{{ currency }} {{ roi_data.annual_saving | numberformat }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% if not roi_data.is_kaizen %}
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-l-4 border-purple-500 transition-colors duration-300">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Investment Cost</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white" data-pkr="{{ roi_data.machinery_cost }}">{{ currency }} {{ roi_data.machinery_cost | numberformat }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-l-4 {% if roi_data.roi_year %}border-green-500{% else %}border-yellow-500{% endif %} transition-colors duration-300">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 {% if roi_data.roi_year %}bg-green-100 dark:bg-green-900{% else %}bg-yellow-100 dark:bg-yellow-900{% endif %} rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar-check {% if roi_data.roi_year %}text-green-600 dark:text-green-400{% else %}text-yellow-600 dark:text-yellow-400{% endif %} text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">ROI Year</p>
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">
+                            {% if roi_data.roi_year %}
+                                {{ roi_data.roi_year }} Years
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Years Selection -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 transition-colors duration-300">
+            <form action="{{ url_for('manager_roi_table', project_id=project.project_id) }}" method="POST" class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-calendar-alt text-gray-400"></i>
+                    <label for="years" class="text-gray-700 dark:text-gray-300 font-medium">Show ROI for:</label>
+                </div>
+                <select id="years" name="years" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    <option value="1" {% if years_to_show == 1 %}selected{% endif %}>1 Year</option>
+                    <option value="2" {% if years_to_show == 2 %}selected{% endif %}>2 Years</option>
+                    <option value="3" {% if years_to_show == 3 %}selected{% endif %}>3 Years</option>
+                    <option value="4" {% if years_to_show == 4 %}selected{% endif %}>4 Years</option>
+                    <option value="5" {% if years_to_show == 5 %}selected{% endif %}>5 Years</option>
+                    <option value="10" {% if years_to_show == 10 %}selected{% endif %}>10 Years</option>
+                </select>
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                    <i class="fas fa-sync-alt mr-2"></i>Update Table
+                </button>
+            </form>
+        </div>
+
+        <!-- ROI Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-8 transition-colors duration-300">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">ROI Breakdown</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">Annual and cumulative savings analysis</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Year</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Annual Saving</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Cumulative Saving</th>
+                            {% if not roi_data.is_kaizen %}
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ROI Achieved</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {% for year in roi_data.years %}
+                        <tr class="{% if year.is_roi %}bg-green-50 dark:bg-green-900 dark:bg-opacity-30{% else %}{% if loop.index is divisibleby 2 %}bg-gray-50 dark:bg-gray-700{% else %}bg-white dark:bg-gray-800{% endif %}{% endif %} hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                <div class="flex items-center">
+                                    {% if year.is_roi %}
+                                        <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                    {% endif %}
+                                    Year {{ year.year }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400" data-pkr="{{ year.saving }}">{{ year.saving | numberformat }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium {% if year.is_roi %}text-green-600 dark:text-green-400{% else %}text-gray-900 dark:text-white{% endif %}" data-pkr="{{ year.cumulative }}">
+                                {{ year.cumulative | numberformat }}
+                            </td>
+                            {% if not roi_data.is_kaizen %}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                {% if year.is_roi %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Yes
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                                        <i class="fas fa-times-circle mr-1"></i>
+                                        No
+                                    </span>
+                                {% endif %}
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 transition-colors duration-300">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white">ROI Trend Visualization</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1">Annual vs cumulative savings progression</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Annual</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Cumulative</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h-96">
+                <canvas id="roiChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="{{ url_for('manager_project_detail', project_id=project.project_id) }}" 
+               class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Project
+            </a>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="{{ url_for('export_roi', project_id=project.project_id, years=years_to_show) }}" 
+                   class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors">
+                    <i class="fas fa-file-excel mr-2"></i>Export to Excel
+                </a>
+                <a href="{{ url_for('export_pdf', project_id=project.project_id) }}" 
+                   class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition-colors">
+                    <i class="fas fa-file-pdf mr-2"></i>Export to PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currencySelect = document.getElementById('currency-select');
+        const monthSelect = document.getElementById('month-select');
+        const ytdDisplay = document.getElementById('ytd-display');
+        const conversionStatus = document.getElementById('conversion-status');
+        const resetBtn = document.getElementById('reset-currency');
+        
+        // Get current year
+        const currentYear = new Date().getFullYear();
+        
+        // Show status message
+        function showStatus(message, type = 'info') {
+            conversionStatus.className = `px-3 py-2 rounded-lg text-sm font-medium ${
+                type === 'error' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                type === 'success' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+            }`;
+            conversionStatus.textContent = message;
+            conversionStatus.classList.remove('hidden');
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                conversionStatus.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Function to convert all PKR values on the page
+        async function convertCurrency() {
+            const currency = currencySelect.value;
+            const month = monthSelect.value;
+            
+            if (!currency) {
+                // Reset all values to PKR
+                document.querySelectorAll('[data-pkr]').forEach(el => {
+                    const pkrValue = parseFloat(el.dataset.pkr);
+                    el.textContent = pkrValue.toLocaleString('en-PK');
+                });
+                ytdDisplay.classList.add('hidden');
+                ytdDisplay.textContent = '';
+                showStatus('Reset to PKR values', 'success');
+                return;
+            }
+            
+            try {
+                showStatus('Converting currency...', 'info');
+                
+                // Get conversion rates
+                const response = await fetch(`/api/convert?currency=${currency}&month=${month}&year=${currentYear}`);
+                const data = await response.json();
+                
+                if (!response.ok || !data || !data.rate) {
+                    throw new Error(data?.error || 'Invalid currency data');
+                }
+                
+                // Display YTD info
+                ytdDisplay.textContent = `YTD (Jan-${month.slice(0, 3)}): 1 ${currency} = ${data.ytd.toFixed(2)} PKR`;
+                ytdDisplay.classList.remove('hidden');
+                
+                // Convert all PKR values on the page
+                document.querySelectorAll('[data-pkr]').forEach(el => {
+                    const pkrValue = parseFloat(el.dataset.pkr);
+                    const convertedValue = pkrValue / data.ytd;
+                    el.textContent = convertedValue.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency,
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                });
+                
+                showStatus(`Converted to ${currency}`, 'success');
+            } catch (error) {
+                console.error('Currency conversion failed:', error);
+                showStatus(`Conversion failed: ${error.message}`, 'error');
+                ytdDisplay.classList.add('hidden');
+            }
+        }
+        
+        // Event listeners
+        currencySelect.addEventListener('change', convertCurrency);
+        monthSelect.addEventListener('change', convertCurrency);
+        resetBtn.addEventListener('click', () => {
+            currencySelect.value = '';
+            convertCurrency();
+        });
+        
+        // Set current month as default
+        const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+        if (monthSelect.querySelector(`option[value="${currentMonth}"]`)) {
+            monthSelect.value = currentMonth;
+        }
+
+        // ROI Chart
+        const roiData = {{ roi_data | tojson }};
+        const currency = "{{ currency }}";
+
+        if (roiData && roiData.years && roiData.years.length > 0) {
+            const labels = roiData.years.map(y => `Year ${y.year}`);
+            const annualSavings = roiData.years.map(y => y.saving);
+            const cumulativeSavings = roiData.years.map(y => y.cumulative);
+
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            
+            // Calculate max values for axes
+            const maxAnnual = Math.max(...annualSavings) * 1.2;
+            const maxCumulative = Math.max(...cumulativeSavings) * 1.1;
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Annual Saving (' + currency + ')',
+                            data: annualSavings,
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y',
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        },
+                        {
+                            label: 'Cumulative Saving (' + currency + ')',
+                            data: cumulativeSavings,
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y1',
+                            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: true
+                        },
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                color: 'rgba(209, 213, 219, 0.3)'
+                            },
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Annual Saving (' + currency + ')',
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            min: 0,
+                            max: maxAnnual,
+                            ticks: {
+                                stepSize: maxAnnual / 5,
+                                color: '#6B7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.3)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Cumulative Saving (' + currency + ')',
+                                color: '#6B7280',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            min: 0,
+                            max: maxCumulative,
+                            ticks: {
+                                stepSize: maxCumulative / 5,
+                                color: '#6B7280',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                                color: 'rgba(209, 213, 219, 0.3)'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        } else {
+            document.getElementById('roiChart').closest('.bg-white').innerHTML = `
+                <div class="text-center py-12">
+                    <i class="fas fa-chart-line text-4xl text-gray-400 mb-4"></i>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">No ROI data available</h3>
+                    <p class="text-gray-500 dark:text-gray-400">There's no data to display the ROI chart.</p>
+                </div>
+            `;
+        }
+    });
+</script>
+{% endblock %}
