@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "687f54b15b29bab719042ae8"
+  },
+  "name": "Kaizen",
+  "created_at": {
+    "$date": "2025-07-22T14:06:57.223Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "687f54b15b29bab719042ae9"
+  },
+  "name": "MIPS",
+  "created_at": {
+    "$date": "2025-07-22T14:06:57.233Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-23T13:25:07.723Z"
+  },
+  "is_active": false
+},
+{
+  "_id": {
+    "$oid": "687f54b15b29bab719042aea"
+  },
+  "name": "Six Sigma",
+  "created_at": {
+    "$date": "2025-07-22T14:06:57.234Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "687f54b15b29bab719042aeb"
+  },
+  "name": "Automation",
+  "created_at": {
+    "$date": "2025-07-22T14:06:57.239Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-22T22:44:51.453Z"
+  },
+  "is_active": false
+},
+{
+  "_id": {
+    "$oid": "687f54b15b29bab719042aec"
+  },
+  "name": "Infrastructure",
+  "created_at": {
+    "$date": "2025-07-22T14:06:57.240Z"
+  },
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "687f5a18fb01bcc9f7734eae"
+  },
+  "name": "MIP",
+  "created_at": {
+    "$date": "2025-07-22T14:30:00.814Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68893042368cfed6123ef9dd"
+  },
+  "name": "lalla",
+  "created_at": {
+    "$date": "2025-07-30T01:34:10.609Z"
+  },
+  "is_active": false
+}]

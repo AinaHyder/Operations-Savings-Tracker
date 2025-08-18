@@ -1,0 +1,7543 @@
+[{
+  "_id": {
+    "$oid": "6880dba62f7ab57441b60f6f"
+  },
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 123000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 1000,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 2300,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 25000,
+      "userEnteredMonthly": true
+    }
+  ],
+  "project_description": "hdjsn",
+  "project_name": "jknx",
+  "project_parameters": [
+    {
+      "after_value": 280,
+      "before_value": 300,
+      "cost": 0.5,
+      "is_custom": false,
+      "name": "Water",
+      "operator": ">",
+      "unit": "Liter"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "9106",
+    "9140"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-01-02",
+  "estimated_savings": 28300,
+  "roi": 276.1,
+  "payback_period": 4.35,
+  "roi_data": {
+    "monthly_saving": 28300,
+    "roi_month": 4.35,
+    "calculated_at": "2025-07-23T17:55:02.212337",
+    "machinery_cost": 123000,
+    "is_kaizen": false
+  },
+  "project_id": "faca0ba4-14c3-4c4b-912e-185547e5782e",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-23T17:55:02.212Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-30T09:57:21.085Z"
+  },
+  "actual_savings": 123756,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 123456
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 290
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 10
+    }
+  ],
+  "manager_comments": "goodd",
+  "reviewed_at": {
+    "$date": "2025-07-25T10:24:07.051Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Control"
+},
+{
+  "_id": {
+    "$oid": "68820aa972fc5219c4347d0c"
+  },
+  "end_date": "2025-05-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 12500,
+  "monthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 230,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 700,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 190,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1520,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "project_description": "hduehnjkn",
+  "project_name": "hduhndj",
+  "project_parameters": [
+    {
+      "after_value": 100,
+      "before_value": 120,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "9106",
+    "9160"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-02-01",
+  "estimated_savings": 1520,
+  "roi": 145.92,
+  "payback_period": 8.22,
+  "roi_data": {
+    "monthly_saving": 1520,
+    "roi_month": 8.22,
+    "calculated_at": "2025-07-24T15:27:53.985347",
+    "machinery_cost": 12500,
+    "is_kaizen": false
+  },
+  "project_id": "845c5024-9ec8-4169-9987-238b5c1b8afa",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T15:27:53.985Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T15:27:53.985Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "manager_comments": "jnjdkn",
+  "reviewed_at": {
+    "$date": "2025-07-24T17:02:00.380Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "68820b4672fc5219c4347d0d"
+  },
+  "factory_code": "DPL1",
+  "machinery_cost": 12500,
+  "project_name": "hduhndj",
+  "project_parameters": [
+    {
+      "after_value": 100,
+      "before_value": 120,
+      "cost": 25,
+      "is_custom": true,
+      "name": "Custom",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "monthlyData": [],
+  "estimated_savings": 0,
+  "roi": 0,
+  "payback_period": 0,
+  "roi_data": {
+    "monthly_saving": 0,
+    "roi_month": 0,
+    "calculated_at": "2025-07-24T15:30:30.934849",
+    "machinery_cost": 12500,
+    "is_kaizen": false
+  },
+  "project_id": "3db49145-5230-4bce-a778-b2677b23241d",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T15:30:30.934Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T19:48:27.610Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [],
+  "manager_comments": "jnka",
+  "reviewed_at": {
+    "$date": "2025-07-24T18:34:03.040Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Measure"
+},
+{
+  "_id": {
+    "$oid": "688216cc72fc5219c4347d0e"
+  },
+  "end_date": "2025-05-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 12300,
+  "monthlyData": [
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 50,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 70,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 10,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 1000,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1550,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "project_description": "dindkj",
+  "project_name": "jfiojdl",
+  "project_parameters": [
+    {
+      "after_value": 280,
+      "before_value": 300,
+      "cost": 1500,
+      "is_custom": false,
+      "name": "Gas",
+      "operator": ">",
+      "unit": "MMBTU"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "9149",
+    "9160"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-03-01",
+  "estimated_savings": 1550,
+  "roi": 151.22,
+  "payback_period": 7.94,
+  "roi_data": {
+    "monthly_saving": 1550,
+    "roi_month": 7.94,
+    "calculated_at": "2025-07-24T16:19:40.630440",
+    "machinery_cost": 12300,
+    "is_kaizen": false
+  },
+  "project_id": "170a42be-fccf-4395-bbd8-0ed562155024",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T16:19:40.630Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T16:19:40.630Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68821bd6a519671cf2d79161"
+  },
+  "end_date": "2025-09-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 45000,
+  "monthlyData": [
+    {
+      "month": "July 2025",
+      "year": 2025,
+      "monthNumber": 7,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "days": [
+        {
+          "day": 1,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 30,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 70,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 50,
+          "notes": ""
+        }
+      ],
+      "totalValue": 690,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "project_description": "hsbjbs",
+  "project_name": "dyuhedhj",
+  "project_parameters": [
+    {
+      "after_value": 100,
+      "before_value": 120,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "43",
+    "65"
+  ],
+  "selected_products": [
+    "TV"
+  ],
+  "start_date": "2025-07-01",
+  "estimated_savings": 690,
+  "roi": 18.4,
+  "payback_period": 65.22,
+  "roi_data": {
+    "monthly_saving": 690,
+    "roi_month": 65.22,
+    "calculated_at": "2025-07-24T16:41:10.428943",
+    "machinery_cost": 45000,
+    "is_kaizen": false
+  },
+  "project_id": "adae45b9-15a6-4aa0-8ec2-98b38d6429b6",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T16:41:10.428Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T16:41:10.428Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "July 2025",
+      "year": 2025,
+      "monthNumber": 7,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68821f4ca519671cf2d79162"
+  },
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 4500,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 120,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 234,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 60,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 900,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 500,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 100,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1934,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "dhcsjnc",
+  "project_name": "dhnka",
+  "project_parameters": [
+    {
+      "after_value": 110,
+      "before_value": 120,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Automation",
+  "selected_models": [
+    "REF-DPL SKD"
+  ],
+  "selected_products": [
+    "REF-DPL SKD"
+  ],
+  "start_date": "2025-01-01",
+  "estimated_savings": 1934,
+  "roi": 515.73,
+  "payback_period": 2.33,
+  "roi_data": {
+    "monthly_saving": 1934,
+    "roi_month": 2.33,
+    "calculated_at": "2025-07-24T16:55:56.846139",
+    "machinery_cost": 4500,
+    "is_kaizen": false
+  },
+  "project_id": "05b0208d-9e19-4391-8ed7-0ea8a4a52686",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T16:55:56.846Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T16:55:56.846Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "688223ffc7918c63461f007b"
+  },
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 2500,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 12,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 800,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 90,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1242,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "fuhbshj",
+  "project_name": "djsknk",
+  "project_parameters": [
+    {
+      "after_value": 130,
+      "before_value": 150,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Infrastructure",
+  "selected_models": [
+    "9169"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-01-02",
+  "estimated_savings": 1242,
+  "roi": 596.16,
+  "payback_period": 2.01,
+  "roi_data": {
+    "monthly_saving": 1242,
+    "roi_month": 2.01,
+    "calculated_at": "2025-07-24T17:15:59.147201",
+    "machinery_cost": 2500,
+    "is_kaizen": false
+  },
+  "project_id": "57047f83-2c8c-47b7-a252-455d9532dcaa",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T17:15:59.147Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T17:15:59.147Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6882271a069bb4eaf3b250a7"
+  },
+  "end_date": "2025-04-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 12000,
+  "monthlyData": [
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 10,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 32,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 200,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 1000,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 56,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 10,
+          "notes": "finshsh"
+        }
+      ],
+      "totalValue": 1328,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "fjnjkdsnj",
+  "project_name": "jnhdkja",
+  "project_parameters": [
+    {
+      "after_value": 185,
+      "before_value": 190,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "65"
+  ],
+  "selected_products": [
+    "TV"
+  ],
+  "start_date": "2025-03-01",
+  "estimated_savings": 1328,
+  "roi": 132.8,
+  "payback_period": 9.04,
+  "roi_data": {
+    "monthly_saving": 1328,
+    "roi_month": 9.04,
+    "calculated_at": "2025-07-24T17:29:14.392949",
+    "machinery_cost": 12000,
+    "is_kaizen": false
+  },
+  "project_id": "1171d31a-2c32-47a5-a084-65d1ccfed968",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T17:29:14.392Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-25T23:58:32.166Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ],
+  "manager_comments": "djsnja",
+  "reviewed_at": {
+    "$date": "2025-07-24T20:03:19.606Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Control"
+},
+{
+  "_id": {
+    "$oid": "688228eb8764acb92659a4d2"
+  },
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 25000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 180,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 190,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 800,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 90,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 10,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 20,
+          "notes": "finshh"
+        }
+      ],
+      "totalValue": 1290,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "tuhiuwhq",
+  "project_name": "djsnks",
+  "project_parameters": [
+    {
+      "after_value": 80,
+      "before_value": 100,
+      "cost": 1500,
+      "is_custom": false,
+      "name": "Gas",
+      "operator": ">",
+      "unit": "MMBTU"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "65"
+  ],
+  "selected_products": [
+    "TV"
+  ],
+  "start_date": "2025-01-01",
+  "estimated_savings": 1290,
+  "roi": 61.92,
+  "payback_period": 19.38,
+  "roi_data": {
+    "monthly_saving": 1290,
+    "roi_month": 19.38,
+    "calculated_at": "2025-07-24T17:36:59.429937",
+    "machinery_cost": 25000,
+    "is_kaizen": false
+  },
+  "project_id": "b3b04a41-e90f-49d2-88e3-857ea99a9ddf",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T17:36:59.429Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T17:36:59.429Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ],
+  "comments": [
+    {
+      "content": "yeayy",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-31T16:22:06.847Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "yeayy",
+  "reviewed_at": {
+    "$date": "2025-07-31T16:22:06.847Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "68822e53534d4d70d058c2f3"
+  },
+  "end_date": "2025-06-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 35000,
+  "monthlyData": [
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 200,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 1000,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 900,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 10,
+          "notes": ""
+        }
+      ],
+      "totalValue": 2530,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "djhndkjw",
+  "project_name": "hsuahusi",
+  "project_parameters": [
+    {
+      "after_value": 170,
+      "before_value": 200,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "Six Sigma",
+  "selected_models": [
+    "9169"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-04-01",
+  "estimated_savings": 2530,
+  "roi": 86.74,
+  "payback_period": 13.83,
+  "roi_data": {
+    "monthly_saving": 2530,
+    "roi_month": 13.83,
+    "calculated_at": "2025-07-24T18:00:03.679049",
+    "machinery_cost": 35000,
+    "is_kaizen": false
+  },
+  "project_id": "5153a04a-f8f1-4236-9cfe-1907f1f7a48e",
+  "status": "Rejected",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T18:00:03.679Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T18:00:03.679Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ],
+  "manager_comments": "",
+  "reviewed_at": {
+    "$date": "2025-07-25T10:39:35.929Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "68822ffa724d6824a8020265"
+  },
+  "end_date": "2025-04-01",
+  "factory_code": "DPL1",
+  "machinery_cost": 30000,
+  "monthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 500,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 600,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 819,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 178,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 289,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 129,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 97,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 199,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 200,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1911,
+      "userEnteredMonthly": false
+    }
+  ],
+  "project_description": "fufhis",
+  "project_name": "euwhdi",
+  "project_parameters": [
+    {
+      "after_value": 210,
+      "before_value": 230,
+      "cost": 25,
+      "is_custom": false,
+      "name": "Electricity",
+      "operator": ">",
+      "unit": "KWH"
+    }
+  ],
+  "project_type": "MIP",
+  "selected_models": [
+    "9140",
+    "9169"
+  ],
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "start_date": "2025-02-01",
+  "estimated_savings": 3011,
+  "roi": 120.44,
+  "payback_period": 9.96,
+  "roi_data": {
+    "monthly_saving": 3011,
+    "roi_month": 9.96,
+    "calculated_at": "2025-07-24T18:07:06.363405",
+    "machinery_cost": 30000,
+    "is_kaizen": false
+  },
+  "project_id": "5f25c061-cdcb-4bdf-a310-81d4a44958e3",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-24T18:07:06.363Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-24T18:07:06.363Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ],
+  "manager_comments": "goooooooddd",
+  "reviewed_at": {
+    "$date": "2025-08-01T09:41:21.833Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "comments": [
+    {
+      "content": "goooooooddd",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-01T09:41:21.833Z"
+      },
+      "type": "review"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68846a76a3da5d4f908f612c"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "wjjkd",
+  "project_description": "jnksnv",
+  "start_date": "2025-01-01",
+  "end_date": "2025-04-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9106",
+    "9160"
+  ],
+  "project_parameters": [
+    {
+      "name": "sigma level",
+      "unit": "KW",
+      "cost": 80,
+      "operator": "<",
+      "before_value": 100,
+      "after_value": 120,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 20000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 1600,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 2600,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 3200,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [
+        {
+          "day": 1,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 50,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 60,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 90,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 2000,
+          "notes": "fhjsnk"
+        }
+      ],
+      "totalValue": 2320,
+      "userEnteredMonthly": false
+    }
+  ],
+  "estimated_savings": 9720,
+  "roi": 583.2,
+  "payback_period": 2.06,
+  "roi_data": {
+    "monthly_saving": 9720,
+    "roi_month": 2.06,
+    "calculated_at": "2025-07-26T10:41:10.005579",
+    "machinery_cost": 20000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "sigma level",
+        "unit": "KW",
+        "cost": 80,
+        "operator": "<",
+        "before_value": 100,
+        "after_value": 120,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "bc577257-6ef2-4775-9462-e5dddb28836e",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-26T10:41:10.005Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-30T13:39:14.993Z"
+  },
+  "actual_savings": 18910,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 15000
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 200
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2000
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "userEnteredMonthly": false,
+      "days": [
+        {
+          "day": 1,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 230,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 200,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 190,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 400,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 30,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 120,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 100,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1710
+    }
+  ],
+  "manager_comments": "lalalal",
+  "reviewed_at": {
+    "$date": "2025-07-26T10:50:47.028Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Analyze",
+  "comments": [
+    {
+      "content": "good",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-26T13:58:49.450Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "goodd",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-27T21:23:43.761Z"
+      },
+      "comment_type": "comment"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68884c3033e7636c9ef39c58"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "uwhsaj",
+  "project_description": "dhjdnjk",
+  "start_date": "2025-01-01",
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9106",
+    "9160"
+  ],
+  "project_parameters": [
+    {
+      "name": "sigma level",
+      "unit": "KW",
+      "cost": 80,
+      "operator": "<",
+      "before_value": 100,
+      "after_value": 120,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 30000,
+  "monthlyData": [],
+  "estimated_savings": 0,
+  "roi": 0,
+  "payback_period": 0,
+  "roi_data": {
+    "monthly_saving": 0,
+    "roi_month": 0,
+    "calculated_at": "2025-07-31T09:34:01.044654",
+    "machinery_cost": 30000,
+    "is_kaizen": false,
+    "parameters": []
+  },
+  "project_id": "7daf1d8e-54a9-4541-86fa-bd614068af3e",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-29T09:21:04.901Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-31T09:34:01.044Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "comments": [
+    {
+      "content": "good",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-29T09:26:42.737Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "good work",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-30T13:24:23.041Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "goood",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-31T16:19:16.823Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "goood",
+  "reviewed_at": {
+    "$date": "2025-07-31T16:19:16.823Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "6889a0858cceaf313b87f2e4"
+  },
+  "project_type": "Infrastructure",
+  "project_name": "lalalal",
+  "project_description": "lalalaalllalallallallallal",
+  "start_date": "2025-01-01",
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "[\"['TV']\", 'TV', 'REF-DPL']",
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9140"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 120,
+      "after_value": 100,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 25000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 3000,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 120,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 200,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 300,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 400,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 600,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 700,
+          "notes": "lalalalla"
+        }
+      ],
+      "totalValue": 2420,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 300,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 5720,
+  "roi": 274.56,
+  "payback_period": 4.37,
+  "roi_data": {
+    "monthly_saving": 5720,
+    "roi_month": 4.37,
+    "calculated_at": "2025-07-30T09:55:58.486847",
+    "machinery_cost": 25000,
+    "is_kaizen": false,
+    "parameters": []
+  },
+  "project_id": "6ff1d94d-27e8-4b07-b293-d39e9bc8d4b8",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-30T09:33:09.620Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-30T09:55:58.486Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "comments": [
+    {
+      "content": "good work",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-30T12:27:21.289Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "good",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-30T12:28:57.117Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "hhjj",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-30T12:30:12.324Z"
+      },
+      "comment_type": "comment"
+    },
+    {
+      "content": "hhnik",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-07-30T12:36:26.644Z"
+      },
+      "comment_type": "comment"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6889d5c63ce7a53c08368988"
+  },
+  "project_type": "Infrastructure",
+  "project_name": "cost reduction tracker",
+  "project_description": "cost reduction tracker",
+  "start_date": "2025-01-01",
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "TV"
+  ],
+  "selected_models": [
+    "40",
+    "55"
+  ],
+  "parameters": [
+    {
+      "name": "sigma level",
+      "unit": "KW",
+      "cost": 80,
+      "operator": "<",
+      "before_value": 120,
+      "after_value": 100,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 30000,
+  "monthlyData": [],
+  "estimated_savings": 0,
+  "roi": 0,
+  "payback_period": 0,
+  "roi_data": {
+    "monthly_saving": 0,
+    "roi_month": 0,
+    "calculated_at": "2025-07-31T09:13:44.770803",
+    "machinery_cost": 30000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "sigma level",
+        "unit": "KW",
+        "cost": 80,
+        "operator": "<",
+        "before_value": 120,
+        "after_value": 100,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "b81ab5af-7d08-4dea-b40a-f9864ed3c74d",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-07-30T13:20:22.157Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-31T09:13:44.770Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "688f98035e422fdfe165e535"
+  },
+  "project_type": "MIP",
+  "project_name": "mipipip",
+  "project_description": "mimipimiimipmopipipipipi",
+  "start_date": "2025-01-01",
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "TV"
+  ],
+  "selected_models": [
+    "32",
+    "50",
+    "65"
+  ],
+  "parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 5,
+      "after_value": 4.25,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 12500,
+  "monthlyData": [],
+  "estimated_savings": 0,
+  "roi": 0,
+  "payback_period": 0,
+  "roi_data": {
+    "monthly_saving": 0,
+    "roi_month": 0,
+    "calculated_at": "2025-08-03T22:15:08.379369",
+    "machinery_cost": 12500,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 5,
+        "after_value": 4.25,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "3a3b8342-67bd-45bb-8f40-269462868e1c",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-03T22:10:27.196Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-03T22:15:08.380Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 0,
+      "userEnteredMonthly": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "688fa43bd596411645faf74a"
+  },
+  "project_type": "MIP",
+  "project_name": "mimpmpm",
+  "project_description": "mimpmimpmommpmppnipmimpm",
+  "start_date": "2025-01-01",
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9140",
+    "9149",
+    "9160"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 5,
+      "after_value": 4.5,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 12500,
+  "monthlyData": [],
+  "estimated_savings": 0,
+  "roi": 0,
+  "payback_period": 0,
+  "roi_data": {
+    "monthly_saving": 0,
+    "roi_month": 0,
+    "calculated_at": "2025-08-03T23:03:20.250559",
+    "machinery_cost": 250,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 5,
+        "after_value": 4.5,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "8944686a-eea1-4a12-84f3-7e0d9c72cedb",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-03T23:02:35.830Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-03T23:06:27.469Z"
+  },
+  "actual_savings": 127600,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 125000
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2600
+    }
+  ],
+  "comments": [
+    {
+      "content": "goood",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-03T23:05:12.751Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "goood",
+  "reviewed_at": {
+    "$date": "2025-08-03T23:05:12.752Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "68902dc38c1d0ff205dd7687"
+  },
+  "project_type": "MIP",
+  "project_name": "mippp",
+  "project_description": "mipppppppppppppppppppppppp",
+  "start_date": "2025-02-01",
+  "end_date": "2025-03-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL SKD"
+  ],
+  "selected_models": [
+    "REF-DPL SKD"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 5,
+      "after_value": 4.5,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 3000,
+  "monthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 1200,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [
+        {
+          "day": 1,
+          "value": 30,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 60,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 80,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 90,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 200,
+          "notes": ""
+        }
+      ],
+      "totalValue": 660,
+      "userEnteredMonthly": false
+    }
+  ],
+  "estimated_savings": 1860,
+  "roi": 744,
+  "payback_period": 1.61,
+  "roi_data": {
+    "monthly_saving": 1860,
+    "roi_month": 1.61,
+    "calculated_at": "2025-08-04T08:49:23.931457",
+    "machinery_cost": 3000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 5,
+        "after_value": 4.5,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "038a8041-4987-4f39-8014-f6376f5f3edc",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-04T08:49:23.931Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-04T08:54:18.473Z"
+  },
+  "actual_savings": 2840,
+  "actualMonthlyData": [
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2500
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "userEnteredMonthly": false,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 10,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 30,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 29,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 30,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 31,
+          "value": 200,
+          "notes": ""
+        }
+      ],
+      "totalValue": 340
+    }
+  ],
+  "comments": [
+    {
+      "content": "besttt",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-04T08:51:47.854Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "besttt",
+  "reviewed_at": {
+    "$date": "2025-08-04T08:51:47.854Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "68919b630fe7411d3f243cd1"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "sixxx sigmaa",
+  "project_description": "sixxx sigmaasasasasasass",
+  "start_date": "2025-01-01",
+  "end_date": "2025-02-01",
+  "factory_code": "DPL2",
+  "selected_products": [
+    "Split-Local",
+    "WD"
+  ],
+  "selected_models": [
+    "Avante-20",
+    "Chrome Pro-20",
+    "Suave Inv-30",
+    "1051"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 26,
+      "operator": ">",
+      "before_value": 100,
+      "after_value": 80,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 3000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 12000,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 90,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 87,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 60,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 54,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 78,
+          "notes": ""
+        }
+      ],
+      "totalValue": 369,
+      "userEnteredMonthly": false
+    }
+  ],
+  "estimated_savings": 12369,
+  "roi": 4947.6,
+  "payback_period": 0.24,
+  "roi_data": {
+    "monthly_saving": 12369,
+    "roi_month": 0.24,
+    "calculated_at": "2025-08-05T10:49:23.486441",
+    "machinery_cost": 3000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 26,
+        "operator": ">",
+        "before_value": 100,
+        "after_value": 80,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "7aee318f-ee0d-4cb8-9074-597c71d840e5",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-05T10:49:23.486Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-05T11:03:00.913Z"
+  },
+  "actual_savings": 4060,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2300
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": false,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 1000,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 200,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 560,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 0,
+          "notes": ""
+        }
+      ],
+      "totalValue": 1760
+    }
+  ],
+  "comments": [
+    {
+      "content": "goood workk",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-05T10:52:18.393Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "goood workk",
+  "reviewed_at": {
+    "$date": "2025-08-05T10:52:18.393Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Improve"
+},
+{
+  "_id": {
+    "$oid": "6891e0caf079454d00192441"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "AI tool",
+  "project_description": "njnjknjnanamnanann,man,an,",
+  "start_date": "2025-01-01",
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "TV"
+  ],
+  "selected_models": [
+    "32",
+    "40"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 32000,
+      "after_value": 28500,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 100000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 2500,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 1000,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 3500,
+  "roi": 42,
+  "payback_period": 28.57,
+  "roi_data": {
+    "monthly_saving": 3500,
+    "roi_month": 28.57,
+    "calculated_at": "2025-08-05T15:45:30.283325",
+    "machinery_cost": 100000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 32000,
+        "after_value": 28500,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "76b47e06-8711-4582-b9ff-f6d287ffdaae",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-05T15:45:30.283Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-05T15:57:56.378Z"
+  },
+  "actual_savings": 3000,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2000
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 1000
+    }
+  ],
+  "comments": [
+    {
+      "content": "good",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-05T15:55:32.126Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "good",
+  "reviewed_at": {
+    "$date": "2025-08-05T15:55:32.126Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Define"
+},
+{
+  "_id": {
+    "$oid": "6893845eca2f7bb945b90471"
+  },
+  "project_type": "Infrastructure",
+  "project_name": "infrararaa",
+  "project_description": "infrastructure infrastructure infrastructure infrastructure",
+  "start_date": "2025-01-01",
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9101",
+    "9106"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 2000,
+      "after_value": 1500,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 1200,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 200,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [
+        {
+          "day": 1,
+          "value": 10,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 20,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 50,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 60,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 90,
+          "notes": ""
+        }
+      ],
+      "totalValue": 230,
+      "userEnteredMonthly": false
+    }
+  ],
+  "estimated_savings": 430,
+  "roi": 430,
+  "payback_period": 2.79,
+  "roi_data": {
+    "monthly_saving": 430,
+    "roi_month": 2.79,
+    "calculated_at": "2025-08-06T21:35:42.371055",
+    "machinery_cost": 1200,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 2000,
+        "after_value": 1500,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "2e39c12d-5796-4279-ab41-67e8ebbea4d1",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-06T21:35:42.375Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-08T14:53:48.784Z"
+  },
+  "actual_savings": 282,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 12
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": false,
+      "days": [
+        {
+          "day": 1,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 2,
+          "value": 27,
+          "notes": ""
+        },
+        {
+          "day": 3,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 4,
+          "value": 24,
+          "notes": ""
+        },
+        {
+          "day": 5,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 6,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 7,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 8,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 9,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 10,
+          "value": 89,
+          "notes": ""
+        },
+        {
+          "day": 11,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 12,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 13,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 14,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 15,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 16,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 17,
+          "value": 100,
+          "notes": ""
+        },
+        {
+          "day": 18,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 19,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 20,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 21,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 22,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 23,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 24,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 25,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 26,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 27,
+          "value": 0,
+          "notes": ""
+        },
+        {
+          "day": 28,
+          "value": 30,
+          "notes": ""
+        }
+      ],
+      "totalValue": 270
+    }
+  ],
+  "comments": [
+    {
+      "content": "good workk",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-08T14:48:40.647Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "good workk",
+  "reviewed_at": {
+    "$date": "2025-08-08T14:48:40.647Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin"
+},
+{
+  "_id": {
+    "$oid": "689487f48519f99b2fcd0ad3"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "harmonics removal",
+  "project_description": "harminics from the electrical system will be removed.",
+  "start_date": "2025-08-01",
+  "end_date": "2025-12-31",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9169"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 27,
+      "after_value": 23,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 100000,
+  "monthlyData": [
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "days": [],
+      "totalValue": 1,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "October 2025",
+      "year": 2025,
+      "monthNumber": 10,
+      "days": [],
+      "totalValue": 2,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "November 2025",
+      "year": 2025,
+      "monthNumber": 11,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "December 2025",
+      "year": 2025,
+      "monthNumber": 12,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 3,
+  "roi": 0.04,
+  "payback_period": 33333.33,
+  "roi_data": {
+    "monthly_saving": 3,
+    "roi_month": 33333.33,
+    "calculated_at": "2025-08-07T16:03:16.089502",
+    "machinery_cost": 100000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 27,
+        "after_value": 23,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "5f952851-6414-4245-88f0-80295181e0cf",
+  "status": "Approved",
+  "created_by_user_id": "689486d28519f99b2fcd0ad2",
+  "created_by_username": "ehsaan",
+  "created_at": {
+    "$date": "2025-08-07T16:03:16.089Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-07T16:09:42.265Z"
+  },
+  "actual_savings": 7,
+  "actualMonthlyData": [
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2
+    },
+    {
+      "month": "October 2025",
+      "year": 2025,
+      "monthNumber": 10,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 3
+    },
+    {
+      "month": "November 2025",
+      "year": 2025,
+      "monthNumber": 11,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 0
+    },
+    {
+      "month": "December 2025",
+      "year": 2025,
+      "monthNumber": 12,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 0
+    }
+  ],
+  "comments": [
+    {
+      "content": "good luck",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-07T16:06:55.495Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "good luck",
+  "reviewed_at": {
+    "$date": "2025-08-07T16:06:55.495Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Analyze"
+},
+{
+  "_id": {
+    "$oid": "68948e5f8519f99b2fcd0ad4"
+  },
+  "project_type": "Infrastructure",
+  "project_name": "installation of new chiller",
+  "project_description": "we will add a more energy efficient chiller to the system.",
+  "start_date": "2025-01-01",
+  "end_date": "2025-12-07",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9101",
+    "9106",
+    "9140",
+    "9149",
+    "9160",
+    "9169"
+  ],
+  "project_parameters": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">",
+      "before_value": 10000,
+      "after_value": 6000,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 100000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "July 2025",
+      "year": 2025,
+      "monthNumber": 7,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "October 2025",
+      "year": 2025,
+      "monthNumber": 10,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "November 2025",
+      "year": 2025,
+      "monthNumber": 11,
+      "days": [],
+      "totalValue": 100000,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "December 2025",
+      "year": 2025,
+      "monthNumber": 12,
+      "days": [],
+      "totalValue": 400,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 103600,
+  "roi": 1243.2,
+  "payback_period": 0.97,
+  "roi_data": {
+    "monthly_saving": 103600,
+    "roi_month": 0.97,
+    "calculated_at": "2025-08-07T16:30:39.580394",
+    "machinery_cost": 100000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Electricity",
+        "unit": "KWH",
+        "cost": 25,
+        "operator": ">",
+        "before_value": 10000,
+        "after_value": 6000,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "02153172-622c-4307-b925-18a7b59b6cfa",
+  "status": "Pending",
+  "created_by_user_id": "689486d28519f99b2fcd0ad2",
+  "created_by_username": "ehsaan",
+  "created_at": {
+    "$date": "2025-08-07T16:30:39.581Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-07T16:30:39.581Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "July 2025",
+      "year": 2025,
+      "monthNumber": 7,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "August 2025",
+      "year": 2025,
+      "monthNumber": 8,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "September 2025",
+      "year": 2025,
+      "monthNumber": 9,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "October 2025",
+      "year": 2025,
+      "monthNumber": 10,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "November 2025",
+      "year": 2025,
+      "monthNumber": 11,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "December 2025",
+      "year": 2025,
+      "monthNumber": 12,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6898ae395eab7f1801c93d99"
+  },
+  "project_type": "Automation",
+  "project_name": "ytytyytyty",
+  "project_description": "tyytytytytyytyytytytyytyt",
+  "start_date": "2025-01-01",
+  "end_date": "2025-02-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL SKD"
+  ],
+  "selected_models": [
+    "REF-DPL SKD"
+  ],
+  "project_parameters": [
+    {
+      "name": "Gas",
+      "unit": "MMBTU",
+      "cost": 1500,
+      "operator": ">",
+      "before_value": 230,
+      "after_value": 200,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 250000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 25,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 5,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 30,
+  "roi": 0.14,
+  "payback_period": 8333.33,
+  "roi_data": {
+    "monthly_saving": 30,
+    "roi_month": 8333.33,
+    "calculated_at": "2025-08-10T19:35:37.892565",
+    "machinery_cost": 250000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Gas",
+        "unit": "MMBTU",
+        "cost": 1500,
+        "operator": ">",
+        "before_value": 230,
+        "after_value": 200,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "66c38af8-6c30-4742-83ce-8fb79f49009d",
+  "status": "Pending",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-10T19:35:37.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-10T19:35:37.894Z"
+  },
+  "actual_savings": 0,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6899661ca2d661a25c346c85"
+  },
+  "project_type": "Six Sigma",
+  "project_name": "Reducing defect rate in PCB",
+  "project_description": "The current PCB manufacturing process has a high defect rate (8%), leading to increased scrap, rework, and customer complaints. Common defects include solder bridging, misalignment, and incomplete etching, contributing to $250,000 in annual rework costs.",
+  "start_date": "2025-01-01",
+  "end_date": "2025-06-01",
+  "factory_code": "DPL1",
+  "selected_products": [
+    "REF-DPL"
+  ],
+  "selected_models": [
+    "9106",
+    "9140",
+    "9169"
+  ],
+  "project_parameters": [
+    {
+      "name": "Gas",
+      "unit": "MMBTU",
+      "cost": 1500,
+      "operator": ">",
+      "before_value": 230,
+      "after_value": 200,
+      "is_custom": false
+    }
+  ],
+  "machinery_cost": 250000,
+  "monthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "days": [],
+      "totalValue": 10,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "days": [],
+      "totalValue": 5,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "days": [],
+      "totalValue": 0,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "days": [],
+      "totalValue": 4,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "days": [],
+      "totalValue": 10,
+      "userEnteredMonthly": true
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "days": [],
+      "totalValue": 1,
+      "userEnteredMonthly": true
+    }
+  ],
+  "estimated_savings": 30,
+  "roi": 0.14,
+  "payback_period": 8333.33,
+  "roi_data": {
+    "monthly_saving": 30,
+    "roi_month": 8333.33,
+    "calculated_at": "2025-08-11T08:40:12.685155",
+    "machinery_cost": 250000,
+    "is_kaizen": false,
+    "parameters": [
+      {
+        "name": "Gas",
+        "unit": "MMBTU",
+        "cost": 1500,
+        "operator": ">",
+        "before_value": 230,
+        "after_value": 200,
+        "is_custom": false
+      }
+    ]
+  },
+  "project_id": "5d94c67a-8a10-468c-b93d-6c0d54dbadb9",
+  "status": "Approved",
+  "created_by_user_id": "687f55a94dd14d9a3e1fbcd1",
+  "created_by_username": "aina",
+  "created_at": {
+    "$date": "2025-08-11T08:40:12.685Z"
+  },
+  "updated_at": {
+    "$date": "2025-08-11T10:07:36.089Z"
+  },
+  "actual_savings": 35,
+  "actualMonthlyData": [
+    {
+      "month": "January 2025",
+      "year": 2025,
+      "monthNumber": 1,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 12
+    },
+    {
+      "month": "February 2025",
+      "year": 2025,
+      "monthNumber": 2,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 0
+    },
+    {
+      "month": "March 2025",
+      "year": 2025,
+      "monthNumber": 3,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 5
+    },
+    {
+      "month": "April 2025",
+      "year": 2025,
+      "monthNumber": 4,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 6
+    },
+    {
+      "month": "May 2025",
+      "year": 2025,
+      "monthNumber": 5,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 10
+    },
+    {
+      "month": "June 2025",
+      "year": 2025,
+      "monthNumber": 6,
+      "userEnteredMonthly": true,
+      "days": [],
+      "totalValue": 2
+    }
+  ],
+  "comments": [
+    {
+      "content": "goood workkk",
+      "author": "amin",
+      "timestamp": {
+        "$date": "2025-08-11T09:51:10.728Z"
+      },
+      "type": "review"
+    }
+  ],
+  "manager_comments": "goood workkk",
+  "reviewed_at": {
+    "$date": "2025-08-11T09:51:10.728Z"
+  },
+  "reviewed_by_user_id": "687f57104dd14d9a3e1fbcd2",
+  "reviewed_by_username": "amin",
+  "six_sigma_phase": "Measure"
+}]

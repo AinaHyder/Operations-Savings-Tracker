@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "687f54b12bbc030a9a3dce30"
+  },
+  "DPL1": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 25,
+      "operator": ">"
+    },
+    {
+      "name": "Gas",
+      "unit": "MMBTU",
+      "cost": 1500,
+      "operator": ">"
+    },
+    {
+      "name": "Water",
+      "unit": "Liter",
+      "cost": 0.5,
+      "operator": ">"
+    },
+    {
+      "name": "sigma level",
+      "unit": "KW",
+      "cost": 80,
+      "operator": "<"
+    }
+  ],
+  "DPL2": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 26,
+      "operator": ">"
+    },
+    {
+      "name": "Water",
+      "unit": "Liter",
+      "cost": 0.55,
+      "operator": ">"
+    },
+    {
+      "name": "sigma level",
+      "unit": "M",
+      "cost": 40,
+      "operator": "<"
+    }
+  ],
+  "URIL": [
+    {
+      "name": "Electricity",
+      "unit": "KWH",
+      "cost": 80,
+      "operator": "<"
+    },
+    {
+      "name": "Gas",
+      "unit": "MMBTU",
+      "cost": 1450,
+      "operator": ">"
+    },
+    {
+      "name": "Water",
+      "unit": "Liter",
+      "cost": 0.48,
+      "operator": ">"
+    },
+    {
+      "name": "sigma level",
+      "unit": "K",
+      "cost": 30,
+      "operator": "<"
+    }
+  ],
+  "currency": "PKR"
+}]

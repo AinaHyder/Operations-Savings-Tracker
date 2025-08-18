@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "6875f89b531336d19acc1113"
+  },
+  "email": "admin@example.com",
+  "created_at": {
+    "$date": "2025-08-12T12:10:40.733Z"
+  },
+  "password": "scrypt:32768:8:1$7Xd7yvZG7jbTEjlD$5f3725f9c6f463fa5971a6793bde54e86519530d893560bcdf1cbc857c64701c77df06d3d8803ffee34a8e9a3752ef683843c31d8a63a5c118ba0e48bc454581",
+  "role": "admin",
+  "status": 1,
+  "username": "Admin User",
+  "updated_at": {
+    "$date": "2025-07-30T02:10:02.167Z"
+  }
+}]

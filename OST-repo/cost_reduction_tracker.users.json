@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "687f55a94dd14d9a3e1fbcd1"
+  },
+  "username": "aina",
+  "email": "aina@gmail.com",
+  "password": "scrypt:32768:8:1$JDq4VA0RwyqfJChD$22f00cacd48ebed39d63f8c3735760296bf82494ba8208deba8fa8338a187b66d787265e9a0543b39f7523a203bfe50b5d3bd0f39073f0ad103f2f9c0730a961",
+  "role": "user",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-07-22T14:11:05.729Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-22T14:29:30.742Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "687f59eafb01bcc9f7734ead"
+  },
+  "username": "afsah",
+  "email": "afsah@gmail.com",
+  "password": "scrypt:32768:8:1$vx0WPZ8F1cqsmqyC$4f6a2a0dbfa16d77561abf1ea2a2212504e95d5ee55e9eecbc7cb535c7eb86ab9a85d3bae5eabb9f470bdf23ee61d03fe6f540139ee55ba82edcf889009be569",
+  "role": "user",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-07-22T14:29:14.265Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-22T22:40:03.888Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6888a6bcdc0f8c7c4ddb1269"
+  },
+  "username": "aila",
+  "email": "aila@gmail.com",
+  "password": "scrypt:32768:8:1$PAbRj55Je2bZMO18$1f722b28397cf9455476826cdac2823dd86c92a3e476f2ebec3052fa2ba4e0af941cc28c713387bdc10164cbc790110ee4c8d904a0da02bbeaebf875eb14ad28",
+  "role": "user",
+  "status": 0,
+  "created_at": {
+    "$date": "2025-07-29T15:47:24.522Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6889d3043ce7a53c08368987"
+  },
+  "username": "user1",
+  "email": "user1@gmail.com",
+  "password": "scrypt:32768:8:1$S6siYVVdmIsXkhIj$c4527756048c9d041ba58cf138315db32d279f9cddd043d382949eabd105c888bd0b9d3669d7f44e220e20e4c8205c131c45735be88275bb6025cc998f3a3ec3",
+  "role": "user",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-07-30T13:08:36.249Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "689486d28519f99b2fcd0ad2"
+  },
+  "username": "ehsaan",
+  "email": "ehsaan@gmail.com",
+  "password": "scrypt:32768:8:1$RftJV5cjW0c478gY$f4b38328aa28cb41d817fd60208f43933b73038979d9dd9a0f17091b69e0ada2c1984719611bccd7b8969dc3fa4188c41a7bd7031868c5b2b3cd7c1a0a6d8705",
+  "role": "user",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-08-07T15:58:26.544Z"
+  }
+}]

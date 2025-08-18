@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "687f57104dd14d9a3e1fbcd2"
+  },
+  "username": "amin",
+  "email": "amin@gmail.com",
+  "password": "scrypt:32768:8:1$HeAH4AL5Gg2krCdT$52df0edc7654a493f474ea53835a1414d0881f9f95a0684a6e6b2c45b70b0c930e74a9b7b8c03fcc18565885b03254344ba8541bc164004f5472ae7bb87e6af2",
+  "role": "manager",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-07-22T14:17:04.827Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-29T09:29:26.487Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68871cc769d5f10f3bea7560"
+  },
+  "username": "Manager User",
+  "email": "manager@example.com",
+  "password": "scrypt:32768:8:1$Md0h5cZsjdCthb5y$862e216550df2940aa5249a93b529a1920235fd1a172e2e910b09e8b7b0bc3451e0cb87168777fd0a71a9bf6b42fff1b582e77a18f59d5de78e3fd5c842f4db6",
+  "role": "manager",
+  "status": 0,
+  "created_at": {
+    "$date": "2025-07-28T11:46:31.559Z"
+  },
+  "updated_at": {
+    "$date": "2025-07-30T02:10:34.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6888b08d536928221ab02682"
+  },
+  "username": "manager",
+  "email": "manager@gmail.com",
+  "password": "scrypt:32768:8:1$a6WxNvaSUhJPdCmu$e7b6636d69ec76c12dd1ef35db287958aab85aadfc11c68136f01306d814d9b6ea6501c9b6dd3907cb338198bc9aecd7a779cf5768795dcf730e74aea4fa51f4",
+  "role": "manager",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-07-29T16:29:17.832Z"
+  }
+}]

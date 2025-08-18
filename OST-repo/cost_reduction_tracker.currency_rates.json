@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "688b878d3558d5d1ac197124"
+  },
+  "currency_name": "USD",
+  "year": 2025,
+  "monthly_rates": {
+    "January": 280,
+    "February": 290,
+    "March": 270,
+    "April": 275,
+    "May": 280,
+    "June": 282,
+    "July": 285,
+    "August": null,
+    "September": null,
+    "October": null,
+    "November": null,
+    "December": null
+  },
+  "updated_at": {
+    "$date": "2025-08-01T07:28:05.985Z"
+  },
+  "ytd_avg": 280.2857142857143
+},
+{
+  "_id": {
+    "$oid": "688f79843558d5d1ac197125"
+  },
+  "currency_name": "EUR",
+  "year": 2025,
+  "monthly_rates": {
+    "January": 123,
+    "February": 120,
+    "March": 128,
+    "April": 126,
+    "May": 132,
+    "June": 140,
+    "July": 143,
+    "August": 139,
+    "September": null,
+    "October": null,
+    "November": null,
+    "December": null
+  },
+  "updated_at": {
+    "$date": "2025-08-11T11:16:48.770Z"
+  },
+  "ytd_avg": 131.375
+}]
